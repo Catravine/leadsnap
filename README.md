@@ -8,3 +8,5 @@ Simply serves up leads
 [Wireframe: Lead Screen](https://docs.google.com/drawings/d/1FS_gpfz36D5tsTGfUiTG30MC52GE3F3NJj21VFGwy7A/edit?usp=sharing)
 
 [Wireframe: Search Screen](https://docs.google.com/drawings/d/1X_skCcf_jJeq0RVkryh2ohBtOzVJmMBHuS00Bg3RMDo/edit?usp=sharing)
+
+[Wireframe: Admin Screen](https://docs.google.com/drawings/d/1K6OzI499aLkcVY7tITFY0emBL1XCePgvXiCmjiipB_Y/edit?usp=sharing)
