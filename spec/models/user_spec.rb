@@ -2,14 +2,16 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
 
-  let(:my_user) { create(:user) }
+  let(:standard_user) { create(:user) }
+  let(:admin_user) { create(:user, role: 2) }
 
   it { should respond_to(:email) }
   it { should respond_to(:nickname) }
+  it { should respond_to(:role) }
 
-  describe "factory girl works" do
-    it "should set a user with password 'password'" do
-      expect(my_user.password).to eq "password"
+  describe "user roles" do
+    it "is standard user by default" do
+      expect(standard_user.role).to eq("standard")
     end
   end
 

@@ -5,6 +5,9 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   before_save :set_nickname
+  before_save { self.role ||= :standard }
+
+  enum role: [:standard, :manager, :admin]
 
   private
 
