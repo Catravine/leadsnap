@@ -1,31 +1,28 @@
-<div class="jumbotron">
-  <div class="row">
-    <div class="col-md-8">
-      <h1>Blocmetrics <span style="color: #09f;" class="glyphicon glyphicon-scale" aria-hidden="true"></span></h1>
-      <p>API Tracking Service and Reporting Tool</p>
-      <% if !(user_signed_in?) %>
-        <p><%= link_to "Sign In", new_user_session_path, class: 'btn btn-primary' %>
-        and get trackin', or Sign up!</p>
-      <% end %>
-    </div>
-    <div class="col-md-4">
-      sign in stuff
-    </div>
-  </div>
-</div>
-
 <div class="row">
-  <div class="col-md-4">
-    <h2>Track <span class="glyphicon glyphicon-check" aria-hidden="true"></span></h2>
-    <p>Client-side wizardry will capture events and movements on your
-    website</p>
+  <div class="col-md-8">
+    <h1>LeadSnap </h1>
+    <p>Simply serves up leads!</p>
   </div>
   <div class="col-md-4">
-    <h2>Playback <span class="glyphicon glyphicon-edit" aria-hidden="true"></span></h2>
-    <p>Server-side magicalness will record the epic tale of... users doin' stuff.</p>
-  </div>
-  <div class="col-md-4">
-    <h2>Attack <span class="glyphicon glyphicon-share" aria-hidden="true"></span></h2>
-    <p>Demistify your users' journeys by scrying with our analytic alchemy!</p>
+
+    <h3>Sign In</h3>
+    <%= form_for(:user, :url => session_path(:user)) do |f| %>
+      <div class="field">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, autofocus: true %>
+      </div>
+
+      <div class="field">
+        <%= f.label :password %><br />
+        <%= f.password_field :password, autocomplete: "off" %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "Log in" %>
+      </div>
+    <% end %>
+
+    <p><%= link_to "About LeadSnap", about_path %></p>
+    </div>
   </div>
 </div>

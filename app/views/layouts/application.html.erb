@@ -12,17 +12,21 @@
   <body>
 
     <div class="container">
-      <% if user_signed_in? %>
-        <ul class="nav nav-tabs">
+      <ul class="nav nav-tabs">
+        <% if user_signed_in? %>
           <li><%= link_to "Home", root_path %></li>
-          <li><%= link_to "About", about_path %></li>
-          <div class="pull-right user-info">
-            Signed in as: <strong><%= current_user.email %></strong> |
-            <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> -
+        <% else %>
+          <li><%= link_to "Sign In", root_path %></li>
+          <li><%= link_to "New User Signup", new_user_registration_path %></li>
+        <% end %>
+        <li><%= link_to "About", about_path %></li>
+        <div class="pull-right user-info">
+          <% if user_signed_in? %>
+            Logged as: <strong><%= current_user.nickname %></strong> |
             <%= link_to "Sign Out", destroy_user_session_path, method: :delete, :class => 'navbar-link' %>
-          </div>
-        </ul>
-      <% end %>
+          <% end %>
+        </div>
+      </ul>
 
       <div class="flash">
         <% if flash[:notice] %>

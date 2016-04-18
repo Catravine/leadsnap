@@ -5,6 +5,7 @@ RSpec.describe User, type: :model do
   let(:my_user) { create(:user) }
 
   it { should respond_to(:email) }
+  it { should respond_to(:nickname) }
 
   describe "factory girl works" do
     it "should set a user with password 'password'" do
