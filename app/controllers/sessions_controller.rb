@@ -8,7 +8,7 @@ class  SessionsController < Devise::SessionsController
       respond_with resource, location: after_sign_in_path_for(resource)
     else
       flash[:alert] = "You're not approved yet... be patient!"
-      sign_out(resource)
+      #sign_out(resource)
       redirect_to root_path
     end
   end
