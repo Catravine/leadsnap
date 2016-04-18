@@ -15,6 +15,9 @@
       <ul class="nav nav-tabs">
         <% if user_signed_in? %>
           <li><%= link_to "Home", root_path %></li>
+          <% if current_user.admin? %>
+            <li><%= link_to "Admin", "/admin" %></li>
+          <% end %>
         <% else %>
           <li><%= link_to "Sign In", root_path %></li>
           <li><%= link_to "New User Signup", new_user_registration_path %></li>

@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
 
+  # 'Administrate' gem dashboards
+  namespace :admin do
+    resources :users
+    root to: "users#index"
+  end
+
   # Users and profiles
   devise_for :users
   #devise_for :users, :controllers => { registrations: 'registrations' }
