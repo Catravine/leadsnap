@@ -9,10 +9,8 @@ module Admin
     before_filter :authenticate_admin
 
     def authenticate_admin
-      if current_user.admin?
-        flash[:notice] = "Welcome, Admin #{current_user.nickname}!"
-      else
-        flash[:alert] = "Not authorized to Administrate!"
+      unless user_signed_in? && current_user.admin?
+        flash[:alert] = "You must be an Admin User to do that."
         redirect_to root_path
       end
     end

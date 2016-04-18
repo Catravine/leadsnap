@@ -10,7 +10,7 @@ class  SessionsController < Devise::SessionsController
   # end
 
   def create
-    if current_user.approved?
+    if (true) #user attempting sign in is approved
       super
     else
       flash[:alert] = "You're not approved yet... be patient!"
