@@ -1,3 +1,5 @@
 <h1><%= @user.nickname %><small> - <%= @user.role %> user</small></h1>
-<p>??<%= link_to 'Edit profile', edit_user_registration_path %>:
-  signed in as <%= current_user.email %>.</p>
+<p>
+  <%= link_to 'Edit profile', edit_user_registration_path %>:
+  <%= @user.fullname %>: <%= @user.phone %> | <%= @user.email %>
+</p>

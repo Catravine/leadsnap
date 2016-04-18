@@ -10,6 +10,9 @@ class UserDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::Number,
     email: Field::String,
+    fullname: Field::String,
+    phone: Field::String,
+    approved: Field::Boolean,
     nickname: Field::String,
     role: Field::String.with_options(searchable: false),
   }
@@ -20,10 +23,11 @@ class UserDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
-    :id,
     :nickname,
+    :phone,
     :email,
-    :role
+    :role,
+    :approved
   ]
 
   # SHOW_PAGE_ATTRIBUTES
@@ -31,6 +35,9 @@ class UserDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = [
     :id,
     :email,
+    :fullname,
+    :phone,
+    :approved,
     :nickname,
     :role,
   ]
@@ -40,6 +47,9 @@ class UserDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
     :email,
+    :fullname,
+    :phone,
+    :approved,
     :nickname,
     :role,
   ]
