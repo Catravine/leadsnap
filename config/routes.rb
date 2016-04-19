@@ -7,7 +7,12 @@ Rails.application.routes.draw do
   end
 
   # Users and profiles
-  devise_for :users, :controllers => { registrations: 'registrations', sessions: 'sessions', passwords: 'passwords' }
+  devise_for :users, :controllers => {
+    registrations: 'registrations',
+    sessions: 'sessions',
+    passwords: 'passwords'
+  }
+  resources :users, only: [:index, :show, :edit, :destroy]
   match 'users/:id' => 'users#show', :as => :profile, via: :get
   authenticated :user do
     root 'users#current_user_home', as: :authenticated_user

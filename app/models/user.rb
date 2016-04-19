@@ -11,7 +11,12 @@ class User < ActiveRecord::Base
 
   def approved_user
     self.approved = true
-    ApprovalMailer.approved_user(self).deliver_now
+    if self.save
+      ApprovalMailer.approved_user(self).deliver_now
+      #flash[:notice] = "#{self.nickname} is now approved!"
+    else
+      flash[:alert] = "Error approving #{self.nickname}. Please try again."
+    end
   end
 
   private
