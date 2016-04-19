@@ -21,6 +21,7 @@
         <% else %>
           <li><%= link_to "Sign In", root_path %></li>
           <li><%= link_to "New User Signup", new_user_registration_path %></li>
+          <li><%= link_to "Recover Password", new_password_path(User) %></li>
         <% end %>
         <li><%= link_to "About", about_path %></li>
         <div class="pull-right user-info">

@@ -79,4 +79,7 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  # ActionMailer settings - setting up Sendgrid
+  config.action_mailer.default_url_options = { host: 'arcane-earth-24059.herokuapp.com' }
 end
