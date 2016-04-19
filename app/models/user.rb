@@ -9,6 +9,10 @@ class User < ActiveRecord::Base
 
   enum role: [:standard, :manager, :admin]
 
+  def approved_user
+    ApprovalMailer.approved_user(self).deliver_now
+  end
+
   private
 
   def set_nickname
