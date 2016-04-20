@@ -1,0 +1,29 @@
+<h1>Edit user: <%= @user.nickname %></h1>
+<div class="row">
+  <div class="col-md-3"><%= @user.fullname %></div>
+  <div class="col-md-3"><%= @user.role %></div>
+  <div class="col-md-3"><%= @user.phone %></div>
+  <div class="col-md-3"><%= @user.email %></div>
+</div>
+<hr/>
+<%= form_for @user do |f| %>
+  <div class="row">
+    <div class="col-md-3">
+      <div class="form-group">
+        <%= f.label :nickname, 'User Nickname:' %>
+        <%= f.text_field :nickname, class: 'form-control', placeholder: "Enter new user nickname" %>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="form-group">
+        <%= f.label :role, 'User Role:' %><br/>
+        <%= f.select :role, ['standard', 'manager', 'admin'], class: 'form-control' %>
+      </div>
+    </div>
+  </div>
+  <hr/>
+  <div class="form-group">
+    <%= f.submit "Save", class: 'btn btn-success' %>
+  </div>
+<% end %>
+</div>

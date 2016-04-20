@@ -26,18 +26,4 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe "#approved_user" do
-    before do
-      approval_user.approved_user
-    end
-
-    it "sends approval notice to user's email" do
-      expect(ApprovalMailer).to receive(:approved_user).with(approval_user).and_return(deliver_now: true)
-    end
-
-    it "sets approved to true" do
-      expect(approval_user.approved).to eq true
-    end
-  end
-
 end
