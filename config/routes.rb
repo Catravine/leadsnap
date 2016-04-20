@@ -12,8 +12,9 @@ Rails.application.routes.draw do
     sessions: 'sessions',
     passwords: 'passwords'
   }
-  resources :users, only: [:index, :show, :edit, :destroy]
-  match 'users/:id' => 'users#show', :as => :profile, via: :get
+  resources :users, only: [:index, :show, :edit, :update, :destroy]
+  match 'users/:id' => 'users#destroy', via: :delete, :as => :admin_destroy_user
+  match 'users/:id' => 'users#show', via: :get, :as => :profile
   authenticated :user do
     root 'users#current_user_home', as: :authenticated_user
   end

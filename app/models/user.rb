@@ -9,16 +9,6 @@ class User < ActiveRecord::Base
 
   enum role: [:standard, :manager, :admin]
 
-  def approved_user
-    self.approved = true
-    if self.save
-      ApprovalMailer.approved_user(self).deliver_now
-      #flash[:notice] = "#{self.nickname} is now approved!"
-    else
-      flash[:alert] = "Error approving #{self.nickname}. Please try again."
-    end
-  end
-
   private
 
   def set_nickname
