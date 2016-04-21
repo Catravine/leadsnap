@@ -2,6 +2,7 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
+    authorize @users
   end
 
   def show
@@ -10,10 +11,12 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
+    authorize @user
   end
 
   def update
     @user = User.find(params[:id])
+    authorize @user
     @user.assign_attributes(user_params)
     @user.save
     redirect_to :back
@@ -21,6 +24,7 @@ class UsersController < ApplicationController
 
   def destroy
     @user = User.find(params[:id])
+    authorize @user
     @user.destroy
     redirect_to :back
   end
