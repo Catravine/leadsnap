@@ -35,6 +35,11 @@ class UsersController < ApplicationController
 
   private
 
+  def record_not_found
+    flash[:alert] = "No such User ID. Dave's not here, man."
+    redirect_to(request.referrer || root_path)
+  end
+
   def user_params
     params.require(:user).permit(:email, :fullname, :phone, :nickname, :password, :password_confirmation, :current_password, :role, :approved)
   end
