@@ -33,20 +33,42 @@ RSpec.describe CampaignsController, type: :controller do
       end
     end
 
-    # describe "GET #show" do
-    #   it "returns http success" do
-    #     get :show
-    #     expect(response).to have_http_status(:success)
-    #   end
-    # end
-    #
-    # describe "GET #new" do
-    #   it "returns http success" do
-    #     get :new
-    #     expect(response).to have_http_status(:success)
-    #   end
-    # end
-    #
+    describe "GET #new" do
+      it "returns http success" do
+        get :new
+        expect(response).to render_template("new")
+      end
+
+      it "instantiates @campaign" do
+        get :new
+        expect(assigns(:campaign)).not_to be_nil
+      end
+    end
+
+    describe "POST #create" do
+      it "assigns the new campaign to @campaign" do
+        post :create, campaign: { name: "new test campaign 1" }
+        expect(assigns(:campaign)).to eq Campaign.last
+      end
+
+      it "redirects to the new campaign page" do
+        post :create, campaign: { name: "new test campaign 2" }
+        expect(response).to redirect_to Campaign.last
+      end
+    end
+
+    describe "GET #show" do
+      it "renders the #show view" do
+        get :show, {id: my_campaign.id}
+        expect(response).to render_template("show")
+      end
+
+      it "assigns my_campaign to @campaign" do
+        get :show, {id: my_campaign.id}
+        expect(assigns(:campaign)).to eq(my_campaign)
+      end
+    end
+
     # describe "GET #edit" do
     #   it "returns http success" do
     #     get :edit
