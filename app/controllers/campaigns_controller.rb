@@ -9,10 +9,12 @@ class CampaignsController < ApplicationController
 
   def new
     @campaign = Campaign.new
+    authorize @campaign
   end
 
   def create
     @campaign = Campaign.new(campaign_params)
+    authorize @campaign
     if @campaign.save
       flash[:notice] = "Campaign saved."
       redirect_to @campaign
@@ -24,10 +26,12 @@ class CampaignsController < ApplicationController
 
   def edit
     @campaign = Campaign.find(params[:id])
+    authorize @campaign
   end
 
   def update
     @campaign = Campaign.find(params[:id])
+    authorize @campaign
     @campaign.assign_attributes(campaign_params)
     if @campaign.save
       flash[:notice] = "Campaign updated."
@@ -40,6 +44,7 @@ class CampaignsController < ApplicationController
 
   def destroy
     @campaign = Campaign.find(params[:id])
+    authorize @campaign
     if @campaign.destroy
       flash[:notice] = "#{@campaign.name} was deleted."
       redirect_to campaigns_path
