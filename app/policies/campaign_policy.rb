@@ -1,5 +1,9 @@
 class CampaignPolicy < ApplicationPolicy
 
+  def show?
+    user.admin? || record.available?
+  end
+
   def new?
     user.admin?
   end
