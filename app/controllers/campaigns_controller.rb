@@ -23,6 +23,30 @@ class CampaignsController < ApplicationController
   end
 
   def edit
+    @campaign = Campaign.find(params[:id])
+  end
+
+  def update
+    @campaign = Campaign.find(params[:id])
+    @campaign.assign_attributes(campaign_params)
+    if @campaign.save
+      flash[:notice] = "Campaign updated."
+      redirect_to @campaign
+    else
+      flash[:alert] = "There was an error updated Campaign.  Please try again."
+      render :edit
+    end
+  end
+
+  def destroy
+    @campaign = Campaign.find(params[:id])
+    if @campaign.destroy
+      flash[:notice] = "#{@campaign.name} was deleted."
+      redirect_to campaigns_path
+    else
+      flash[:alert] = "There was an error deleting Campaign.  Please try again."
+      render :show
+    end
   end
 
   private

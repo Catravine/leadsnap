@@ -69,12 +69,47 @@ RSpec.describe CampaignsController, type: :controller do
       end
     end
 
-    # describe "GET #edit" do
-    #   it "returns http success" do
-    #     get :edit
-    #     expect(response).to have_http_status(:success)
-    #   end
-    # end
+    describe "GET #edit" do
+      it "returns http success" do
+        get :edit, {id: my_campaign.id}
+        expect(response).to render_template("edit")
+      end
+
+      it "assigns campaign to be updated to @campaign" do
+        get :edit, {id: my_campaign.id}
+        campaign_instance = assigns(:campaign)
+        expect(campaign_instance.name).to eq my_campaign.name
+      end
+    end
+
+    describe "PUT #update" do
+      # it "updates campaign with expected attributes" do
+      #   new_name = "Updated Campaign 1"
+      #   put :update, id: my_campaign.id, camapaign: {name: new_name}
+      #   updated_campaign = assigns(:campaign)
+      #   expect(updated_campaign.id).to eq my_campaign.id
+      #   expect(updated_campaign.title).to eq new_name
+      # end
+
+      it "redirects to updated campaign" do
+        new_name = "Updated Campaign 2"
+        put :update, id: my_campaign.id, campaign: {name: new_name}
+        expect(response).to redirect_to my_campaign
+      end
+    end
+
+    describe "DELETE #destroy" do
+      it "deletes the post" do
+        delete :destroy, {id: my_campaign.id}
+        count = Campaign.where({id: my_campaign.id}).size
+        expect(count).to eq 0
+      end
+
+      it "redirects to post index" do
+        delete :destroy, {id: my_campaign.id}
+        expect(response).to redirect_to campaigns_path
+      end
+    end
 
   end
 end

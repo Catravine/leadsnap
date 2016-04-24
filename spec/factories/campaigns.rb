@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :campaign do
-    name "MyString"
-    year "MyString"
+    sequence(:name) { |n| "Campaign #{n}" }
+    year DateTime.now.year
     code "MyString"
     callback_phone "MyString"
     notes "MyText"
