@@ -5,5 +5,6 @@ FactoryGirl.define do
     code "MyString"
     callback_phone "MyString"
     notes "MyText"
+    available true
   end
 end
