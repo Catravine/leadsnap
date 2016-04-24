@@ -1,0 +1,11 @@
+<h1>Available Campaigns:</h1>
+
+<% Campaign.where(available: true).each do |campaign| %>
+  <h3><%= link_to campaign.name, campaign %><span class="year"><%= campaign.year %></span></h3>
+<% end %>
+
+<h1>Suspended Campaigns:</h1>
+
+<% Campaign.where(available: false).each do |campaign| %>
+  <h3><%= link_to campaign.name, campaign %><span class="year"><%= campaign.year %></span></h3>
+<% end %>

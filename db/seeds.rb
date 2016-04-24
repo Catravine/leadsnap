@@ -36,8 +36,8 @@ Campaign.create!(
   year: "2016",
   code: "42",
   callback_phone: "(317) 667-0473",
-  notes: "Pay-it-forward offer includes any remaining 15/16 series
-    concert (except Carmina Burana)."
+  notes: "Pay-it-forward offer includes any remaining 15/16 series concert (except Carmina Burana).",
+  available: true
 )
 
 Campaign.create!(
@@ -45,7 +45,8 @@ Campaign.create!(
   year: "2016",
   code: "42",
   callback_phone: "(317) 667-0473",
-  notes: "April 17: our value pak price is now $190."
+  notes: "April 17: our value pak price is now $190.",
+  available: true
 )
 
 puts "SEED FINISHED"

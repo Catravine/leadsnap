@@ -15,6 +15,7 @@
       <ul class="nav nav-tabs">
         <% if user_signed_in? %>
           <li><%= link_to "Home", root_path %></li>
+          <li><%= link_to "Campaigns", campaigns_path %></li>
           <% if policy(User).index? %>
             <li><%= link_to new_users?, users_path %></li>
             <li><%= link_to "(Administrate gem)", "/admin", data: { 'no-turbolink' => true } %></li>
