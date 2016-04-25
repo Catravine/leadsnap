@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe CampaignsController, type: :controller do
 
   let(:my_user) { create(:user) }
+  let(:my_admin) { create(:user, role: 2)}
   let(:my_campaign) { create(:campaign) }
 
   context "guest user" do
@@ -14,11 +15,78 @@ RSpec.describe CampaignsController, type: :controller do
     end
   end
 
-  context "signed in user" do
+  context "signed in standard user" do
     before(:each) do
       request.env["HTTP_REFERER"] = "where_i_came_from"
       @request.env["devise.mapping"] = Devise.mappings[:user]
       sign_in my_user
+    end
+
+    describe "GET #index" do
+      it "renders the index template" do
+        get :index
+        expect(response).to render_template("index")
+      end
+
+      it "assigns [my_campaign] to @campaigns" do
+        get :index
+        expect(assigns(:campaigns)).to eq([my_campaign])
+      end
+    end
+
+    describe "GET #new" do
+      it "is unauthorized" do
+        get :new
+        expect(response).to have_http_status(302)
+      end
+    end
+
+    describe "POST #create" do
+      it "is unauthorized" do
+        post :create, campaign: { name: "new test campaign 1" }
+        expect(response).to have_http_status(302)
+      end
+    end
+
+    describe "GET #show" do
+      it "renders the #show view" do
+        get :show, {id: my_campaign.id}
+        expect(response).to render_template("show")
+      end
+
+      it "assigns my_campaign to @campaign" do
+        get :show, {id: my_campaign.id}
+        expect(assigns(:campaign)).to eq(my_campaign)
+      end
+    end
+
+    describe "GET #edit" do
+      it "is unauthorized" do
+        get :edit, {id: my_campaign.id}
+        expect(response).to have_http_status(302)
+      end
+    end
+
+    describe "PUT #update" do
+      it "is unauthorized" do
+        put :update, id: my_campaign.id, campaign: {name: "Updated Campaign"}
+        expect(response).to have_http_status(302)
+      end
+    end
+
+    describe "DELETE #destroy" do
+      it "is unauthorized" do
+        delete :destroy, {id: my_campaign.id}
+        expect(response).to have_http_status(302)
+      end
+    end
+  end
+
+  context "signed in admin user" do
+    before(:each) do
+      request.env["HTTP_REFERER"] = "where_i_came_from"
+      @request.env["devise.mapping"] = Devise.mappings[:user]
+      sign_in my_admin
     end
 
     describe "GET #index" do
@@ -105,11 +173,10 @@ RSpec.describe CampaignsController, type: :controller do
         expect(count).to eq 0
       end
 
-      it "redirects to post index" do
+      it "redirects to campaign index" do
         delete :destroy, {id: my_campaign.id}
         expect(response).to redirect_to campaigns_path
       end
     end
-
   end
 end
