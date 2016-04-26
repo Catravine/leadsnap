@@ -17,6 +17,22 @@
  @import "bootstrap-sprockets";
  @import "bootstrap";
 
+ * {
+   font-family: 'Varela Round', sans-serif;
+ }
+
+ h1, h2, h3, h4, h5, h6 {
+   font-family: 'Ubuntu', sans-serif;
+ }
+
+ p {
+   font-family: 'Lora', serif;
+ }
+
+ .btn {
+   font-family: 'Shadows Into Light', cursive;
+ }
+
  .user-info {
  margin-top: 9px;
  }
