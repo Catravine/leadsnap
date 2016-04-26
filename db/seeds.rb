@@ -1,3 +1,5 @@
+require 'csv'
+
 # Create an admin user for my primary email
 caroline = User.create!(
   email: "caroline@carolinecourtney.com",
@@ -49,6 +51,29 @@ Campaign.create!(
   available: true
 )
 
+# Seed some leads from csv file
+csv_text = File.read(Rails.root.join('lib', 'seeds', 'sotp_sample_seed.csv'))
+csv = CSV.parse(csv_text, :headers => true)
+csv.each do |row|
+  l = Lead.new
+  l.account = row['account']
+  l.name1 = row['name1']
+  l.name2 = row['name2']
+  l.address1 = row['address1']
+  l.address2 = row['address2']
+  l.city = row['city']
+  l.state = row['state']
+  l.zip = row['zip']
+  l.phone1 = row['phone1']
+  l.phone2 = row['phone2']
+  l.phone3 = row['phone3']
+  l.source_code = row['source']
+  l.campaign_id = 2
+  l.save
+  puts "#{l.name1} saved."
+end
+
 puts "SEED FINISHED"
 puts "#{User.all.count} users created."
 puts "#{Campaign.all.count} campaigns created."
+puts "#{Lead.all.count} leads created."
