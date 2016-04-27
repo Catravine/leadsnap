@@ -20,29 +20,6 @@ RSpec.describe Lead, type: :model do
   it { should respond_to(:phone3) }
   it { should respond_to(:source_code) }
 
-  describe "#campaign_name" do
-    it "returns the name of the campaign" do
-      expect(my_lead.campaign_name).to eq my_campaign.name
-    end
-  end
-
-  describe "#campaign_notes" do
-    it "returns the notes of the campaign" do
-      expect(my_lead.campaign_notes).to eq my_campaign.notes
-    end
-  end
-
-  describe "#campaign_code" do
-    it "returns the code of the campaign" do
-      expect(my_lead.campaign_code).to eq my_campaign.code
-    end
-  end
-
-  describe "#campaign_phone" do
-    it "returns the phone of the campaign" do
-      expect(my_lead.campaign_phone).to eq my_campaign.callback_phone
-    end
-  end
-
+  it { should belong_to(:campaign) }
 
 end

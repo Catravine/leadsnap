@@ -4,15 +4,12 @@
   <div class="col-md-8">
     <p>Code: <%= @campaign.code %>, Callback #: <%= @campaign.callback_phone %>,
       Available: <%= @campaign.available %></p>
-    <% if Lead.where(campaign_id: @campaign.id).count == 0 %>
+    <% if amt_leads(@campaign) == 0 %>
       <h2>No leads yet.</h2>
     <% else %>
-      <h2><%= link_to "Total Leads", lead_path(Lead.where(campaign_id: @campaign).sample) %>: <%= Lead.where(campaign_id: @campaign.id).count %></h2>
-      <ul>
-        <% Lead.where(campaign_id: @campaign.id).uniq.pluck(:source_code).each do |code| %>
-          <li><%= link_to code, lead_path(Lead.where(campaign_id: @campaign, source_code: code).sample) %>: <%= Lead.where(campaign_id: @campaign.id, source_code: code).count %></li>
-        <% end %>
-      </ul>
+      <h2><%= link_to "Total Leads", lead_path(Lead.where(campaign_id: @campaign).sample) %>:
+        <%= amt_leads(@campaign) %></h2>
+        <%= render partial: 'lead_breakdown', locals: { campaign: @campaign } %>
       <p>(leads are randomly <code>sampled</code> for now.)</p>
     <% end %>
 

@@ -10,4 +10,7 @@ RSpec.describe Campaign, type: :model do
   it { should respond_to(:callback_phone) }
   it { should respond_to(:notes) }
   it { should respond_to(:available) }
+
+  it { should have_many(:leads) }
+
 end

@@ -1,10 +1,10 @@
 <div class="row lead-title">
   <div class="col-md-8">
-    <h1><%= @lead.campaign_name %></h1>
+    <h1><%= campaign_name(@lead) %></h1>
   </div>
   <div class="col-md-4">
-    <p><%= @lead.campaign_phone %> // dial code: <%= @lead.campaign_code %><br/>
-    <%= @lead.campaign_notes %></p>
+    <p><%= campaign_phone(@lead) %> // dial code: <%= campaign_code(@lead) %><br/>
+    <%= campaign_notes(@lead) %></p>
   </div>
 </div>
 
@@ -55,6 +55,7 @@
     <h3>callback stuff</h3>
   </div>
   <div class="col-md-4">
-    <%= link_to "Next Lead (random - all leads)", lead_path(Lead.all.sample), class: 'btn btn-success btn-lg' %>
+    <%= link_to 'Next Lead >>', lead_path(Lead.all.sample), class: 'btn btn-success btn-lg' %>
+    <br/>(next lead is *random* out of all leads in the system - for now.)
   </div>
 </div>

@@ -1,0 +1,10 @@
+<table class="lead-breakdown">
+  <tr><th>Source</th><th># leads</th><th>ave x dialed</th></tr>
+  <% sources(@campaign).each do |code| %>
+    <tr>
+      <td><%= link_to code, lead_path(Lead.where(campaign_id: @campaign, source_code: code).sample) %>:</td>
+      <td><%= amt_leads(@campaign, code) %></td>
+      <td>--</td>
+    </tr>
+  <% end %>
+</table>
