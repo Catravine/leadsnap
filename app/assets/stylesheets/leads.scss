@@ -1,0 +1,24 @@
+// Place all the styles related to the leads controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.phone-numbers td {
+  font-size: 120%;
+  //border-right: 1px solid #ccc;
+  padding: 5px;
+}
+
+.phone-numbers .glyphicon {
+  padding: 5px;
+  color: #900;
+}
+
+.lead-contact {
+  font-size: 150%;
+  line-height: 1.5em;
+  margin: 10px 5px;
+}
+
+.lead-title p {
+  margin-top: 15px;
+}

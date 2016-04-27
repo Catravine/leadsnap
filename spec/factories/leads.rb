@@ -12,5 +12,6 @@ FactoryGirl.define do
     phone2 "Phone #2"
     phone3 "Phone #3"
     source_code "Source Code"
+    campaign_id nil
   end
 end

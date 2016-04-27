@@ -1,0 +1,60 @@
+<div class="row lead-title">
+  <div class="col-md-8">
+    <h1><%= @lead.campaign_name %></h1>
+  </div>
+  <div class="col-md-4">
+    <p><%= @lead.campaign_phone %> // dial code: <%= @lead.campaign_code %><br/>
+    <%= @lead.campaign_notes %></p>
+  </div>
+</div>
+
+<hr/>
+
+<div class="row">
+  <div class="col-md-8">
+    <table class="phone-numbers">
+      <tr>
+        <% if @lead.phone1 %>
+          <td><%= @lead.phone1 %><span class="glyphicon glyphicon-remove"></span></td>
+        <% end %>
+        <% if @lead.phone2 %>
+          <td><%= @lead.phone2 %><span class="glyphicon glyphicon-remove"></span></td>
+        <% end %>
+        <% if @lead.phone3 %>
+          <td><%= @lead.phone3 %><span class="glyphicon glyphicon-remove"></span></td>
+        <% end %>
+      </tr>
+    </table>
+
+    <p class="lead-contact">
+      <%= @lead.name1 %> <% if @lead.name2 %>&amp; <% @lead.name2 %><% end %><br/>
+      <%= @lead.address1 %> <%= @lead.address2 %><br/>
+      <%= @lead.city %>, <%= @lead.state %> &nbsp; <%= @lead.zip %>
+    </p>
+
+
+
+    <table class="phone-numbers">
+      <tr>
+        <td><%= @lead.source_code %></td>
+        <% if @lead.account %>
+          <td># <%= @lead.account %></td>
+        <% end %>
+      </tr>
+    </table>
+  </div>
+  <div class="col-md-4">
+    <h3>lead actions</h3>
+  </div>
+</div>
+
+<hr/>
+
+<div class="row">
+  <div class="col-md-8">
+    <h3>callback stuff</h3>
+  </div>
+  <div class="col-md-4">
+    <%= link_to "Next Lead (random - all leads)", lead_path(Lead.all.sample), class: 'btn btn-success btn-lg' %>
+  </div>
+</div>
