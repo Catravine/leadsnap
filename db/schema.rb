@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160426064737) do
+ActiveRecord::Schema.define(version: 20160428192048) do
 
   create_table "campaigns", force: :cascade do |t|
     t.string   "name"
@@ -37,9 +37,11 @@ ActiveRecord::Schema.define(version: 20160426064737) do
     t.string   "phone2"
     t.string   "phone3"
     t.string   "source_code"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
     t.integer  "campaign_id"
+    t.datetime "last_dialed", default: '2016-04-28 19:30:07', null: false
+    t.integer  "dial_count",  default: 0
   end
 
   add_index "leads", ["account"], name: "index_leads_on_account"

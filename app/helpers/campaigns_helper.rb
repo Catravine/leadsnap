@@ -1,20 +1,13 @@
 module CampaignsHelper
 
-  def all_leads(campaign)
+  def all_leads(campaign, *code)
+    return Lead.where(campaign_id: campaign, source_code: code) if code.present?
     Lead.where(campaign_id: campaign)
   end
 
-  def amt_leads(*args)
-    case args.length
-    when 1
-      # return amount of leads in a whole campaign
-      return all_leads(args.first).count
-    when 2
-      # return amount of leads in a campaign with given source code
-      return Lead.where(campaign_id: args.first, source_code: args[1]).count
-    else
-      raise ArgumentError, "Too many arguments"
-    end
+  def amt_leads(campaign, *code)
+    return all_leads(campaign).where(source_code: code).count if code.present?
+    all_leads(campaign).count
   end
 
   def sources(campaign)

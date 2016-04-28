@@ -1,0 +1,6 @@
+<h1>All Leads</h1>
+<ul>
+  <% @leads.each do |lead| %>
+    <li><%= link_to lead.name1, lead_path(lead) %></li>
+  <% end %>
+</ul>

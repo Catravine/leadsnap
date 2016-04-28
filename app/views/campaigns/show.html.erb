@@ -7,10 +7,9 @@
     <% if amt_leads(@campaign) == 0 %>
       <h2>No leads yet.</h2>
     <% else %>
-      <h2><%= link_to "Total Leads", lead_path(Lead.where(campaign_id: @campaign).sample) %>:
+      <h2><%= link_to "Total Leads", lead_path(all_leads(@campaign).first) %>:
         <%= amt_leads(@campaign) %></h2>
         <%= render partial: 'lead_breakdown', locals: { campaign: @campaign } %>
-      <p>(leads are randomly <code>sampled</code> for now.)</p>
     <% end %>
 
     <h3>Latest Notes:</h3>
