@@ -56,7 +56,7 @@
   </div>
   <div class="col-md-4">
     <%= link_to 'Next Lead >>', lead_path(Lead.all.first), class: 'btn btn-success btn-lg' %>
-    <br/>(next lead is *random* out of all leads in the system - for now.)
+    <br/>('next lead' is least recently dialed of all leads in the system - for now.)
     <p>Last dialed: <%= @lead.last_dialed %> // Dial Count: <%= @lead.dial_count %>
   </div>
 </div>
