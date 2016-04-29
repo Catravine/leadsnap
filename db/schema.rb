@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(version: 20160428192048) do
     t.datetime "created_at",                                  null: false
     t.datetime "updated_at",                                  null: false
     t.integer  "campaign_id"
-    t.datetime "last_dialed", default: '2016-04-28 19:30:07', null: false
+    t.datetime "last_dialed", default: '2016-04-29 19:02:29', null: false
     t.integer  "dial_count",  default: 0
   end
 

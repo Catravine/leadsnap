@@ -5,7 +5,8 @@ class LeadsController < ApplicationController
   end
 
   def show
-    @lead = Lead.find(params[:id])
+    @campaign = Campaign.find(params[:campaign_id])
+    @lead = @campaign.next_lead(params[:source_code])
     @lead.dial_lead
   end
 
