@@ -2,7 +2,7 @@
   <tr><th>Source</th><th># leads</th><th>ave x dialed thru</th></tr>
   <% sources(@campaign).each do |code| %>
     <tr>
-      <td><%= link_to code, lead_path(all_leads(@campaign, code).first) %>:</td>
+      <td><%= link_to code, campaign_lead_path(@campaign, all_leads(@campaign, code).first, source_code: code) %>:</td>
       <td><%= amt_leads(@campaign, code) %></td>
       <td><%= all_leads(@campaign, code).average(:dial_count).floor %></td>
     </tr>

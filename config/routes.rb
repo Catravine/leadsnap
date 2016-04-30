@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
 
   # Campaigns (of leads)
-  resources :campaigns
-  resources :leads
+  resources :campaigns do
+    resources :leads
+  end
 
   # 'Administrate' gem dashboards
   namespace :admin do

@@ -3,7 +3,7 @@
     <h1><%= @lead.campaign_name %></h1>
   </div>
   <div class="col-md-4">
-    <p><%= @lead.campaign_phone %> // dial code: <%= @lead.campaign_code %><br/>
+    <p><%= @lead.campaign_callback_phone %> // dial code: <%= @lead.campaign_code %><br/>
     <%= @lead.campaign_notes %></p>
   </div>
 </div>
@@ -55,8 +55,7 @@
     <h3>callback stuff</h3>
   </div>
   <div class="col-md-4">
-    <%= link_to 'Next Lead >>', lead_path(Lead.all.first), class: 'btn btn-success btn-lg' %>
-    <br/>('next lead' is least recently dialed of all leads in the system - for now.)
-    <p>Last dialed: <%= @lead.last_dialed %> // Dial Count: <%= @lead.dial_count %>
+    <%= link_to 'Next Lead >>', campaign_lead_path(source_code: @lead.source_code), class: 'btn btn-success btn-lg' %>
+    <p><%= @lead.campaign_name %>, <%= @lead.source_code %></p>
   </div>
 </div>
