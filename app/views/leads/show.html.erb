@@ -1,6 +1,6 @@
 <div class="row lead-title">
   <div class="col-md-8">
-    <h1><%= @lead.campaign_name %></h1>
+    <h1><%= link_to @lead.campaign_name, campaign_path(@campaign) %></h1>
   </div>
   <div class="col-md-4">
     <p><%= @lead.campaign_callback_phone %> // dial code: <%= @lead.campaign_code %><br/>
@@ -55,7 +55,8 @@
     <h3>callback stuff</h3>
   </div>
   <div class="col-md-4">
-    <%= link_to 'Next Lead >>', campaign_lead_path(source_code: @lead.source_code), class: 'btn btn-success btn-lg' %>
-    <p><%= @lead.campaign_name %>, <%= @lead.source_code %></p>
+    <%= link_to "#{@lead.source_code} | Next Lead >>",
+      campaign_lead_path(@campaign, @campaign.next_lead(@lead.source_code)),
+      class: 'btn btn-success btn-lg' %>
   </div>
 </div>

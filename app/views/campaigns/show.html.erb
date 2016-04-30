@@ -5,8 +5,7 @@
     <% if amt_leads(@campaign) == 0 %>
       <h2>No leads yet.</h2>
     <% else %>
-      <h2><%= link_to "Total Leads", campaign_lead_path(@campaign, all_leads(@campaign).first) %>:
-        <%= amt_leads(@campaign) %></h2>
+      <h2>Total Leads: <%= amt_leads(@campaign) %></h2>
         <p>Dialed through an avarage of
         <%= all_leads(@campaign).average(:dial_count).floor %> times.</p>
         <h3>Breakdown by Source Code:</h3>
@@ -17,6 +16,9 @@
     <p><%= @campaign.notes %></p>
   </div>
   <div class="col-md-4">
+    <% if policy(Lead).index? %>
+      <h3><%= link_to "Index of Leads", campaign_leads_path(@campaign) %><h3>
+    <% end %>
     <% if policy(Campaign).edit? %>
       <h3>Add Leads</h3>
       ...

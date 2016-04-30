@@ -1,12 +1,14 @@
 class LeadsController < ApplicationController
 
   def index
-    @leads = Lead.all
+    @campaign = Campaign.find(params[:campaign_id])
+    @leads = Lead.where(campaign_id: @campaign)
+    authorize @leads
   end
 
   def show
     @campaign = Campaign.find(params[:campaign_id])
-    @lead = @campaign.next_lead(params[:source_code])
+    @lead = Lead.find(params[:id])
     @lead.dial_lead
   end
 

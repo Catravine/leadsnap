@@ -25,31 +25,12 @@ RSpec.describe Lead, type: :model do
   it { should respond_to(:last_dialed) }
   it { should respond_to(:dial_count) }
 
+  # Delegated from Campaign model it belongs to
   it { should belong_to(:campaign) }
-
-  describe "#campaign_name" do
-    it "returns the name of the campaign" do
-      expect(my_lead.campaign_name).to eq my_campaign.name
-    end
-  end
-
-  describe "#campaign_notes" do
-    it "returns the notes of the campaign" do
-      expect(my_lead.campaign_notes).to eq my_campaign.notes
-    end
-  end
-
-  describe "#campaign_code" do
-    it "returns the code of the campaign" do
-      expect(my_lead.campaign_code).to eq my_campaign.code
-    end
-  end
-
-  describe "#campaign_phone" do
-    it "returns the phone of the campaign" do
-      expect(my_lead.campaign_phone).to eq my_campaign.callback_phone
-    end
-  end
+  it { should respond_to(:campaign_name)}
+  it { should respond_to(:campaign_notes)}
+  it { should respond_to(:campaign_code)}
+  it { should respond_to(:campaign_callback_phone)}
 
   describe "#dial_lead" do
     it "increases dial_count by 1" do

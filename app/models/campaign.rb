@@ -4,4 +4,5 @@ class Campaign < ActiveRecord::Base
   def next_lead(source_code)
     leads.where(source_code: source_code).first
   end
+
 end
