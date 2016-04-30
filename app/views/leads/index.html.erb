@@ -1,8 +1,10 @@
 <h1>All Leads: <%= link_to @campaign.name, campaign_path(@campaign) %></h1>
 <ul>
   <% @leads.each do |lead| %>
-    <li><%= link_to lead.name1, campaign_lead_path(@campaign, lead) %>: &nbsp; <%= lead.phone1 if lead.phone1 %>
-     &nbsp; <%= lead.phone2 if lead.phone2 %>
-     &nbsp; <%= lead.phone3 if lead.phone3 %></li>
+    <li><%= link_to lead.name1, campaign_lead_path(@campaign, lead) %>:
+      &nbsp; <%= lead.phone1 if lead.phone1 %>
+      &nbsp; <%= lead.phone2 if lead.phone2 %>
+      &nbsp; <%= lead.phone3 if lead.phone3 %>
+    </li>
   <% end %>
 </ul>
