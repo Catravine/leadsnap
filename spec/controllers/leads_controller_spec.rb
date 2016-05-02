@@ -42,6 +42,14 @@ RSpec.describe LeadsController, type: :controller do
         expect(assigns(:lead)).to eq(my_lead)
       end
     end
+
+    describe "GET #edit" do
+      it "assigns lead to be updated to @lead" do
+        get :edit, {campaign_id: my_campaign.id, id: my_lead.id}
+        lead_instance = assigns(:lead)
+        expect(lead_instance.name1).to eq my_lead.name1
+      end
+    end
   end
 
   context "signed in manager user" do
@@ -74,6 +82,14 @@ RSpec.describe LeadsController, type: :controller do
         expect(assigns(:lead)).to eq(my_lead)
       end
     end
+
+    describe "GET #edit" do
+      it "assigns lead to be updated to @lead" do
+        get :edit, {campaign_id: my_campaign.id, id: my_lead.id}
+        lead_instance = assigns(:lead)
+        expect(lead_instance.name1).to eq my_lead.name1
+      end
+    end
   end
 
   context "signed in admin user" do
@@ -104,6 +120,14 @@ RSpec.describe LeadsController, type: :controller do
       it "assigns my_lead to @lead" do
         get :show, {campaign_id: my_campaign.id, id: my_lead.id}
         expect(assigns(:lead)).to eq(my_lead)
+      end
+    end
+
+    describe "GET #edit" do
+      it "assigns lead to be updated to @lead" do
+        get :edit, {campaign_id: my_campaign.id, id: my_lead.id}
+        lead_instance = assigns(:lead)
+        expect(lead_instance.name1).to eq my_lead.name1
       end
     end
   end

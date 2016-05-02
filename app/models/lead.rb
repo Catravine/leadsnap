@@ -14,4 +14,9 @@ class Lead < ActiveRecord::Base
     self.save!
   end
 
+  def kill_lead
+    self.killed = true
+    self.save!
+  end
+
 end

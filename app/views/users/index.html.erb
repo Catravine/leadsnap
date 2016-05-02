@@ -6,9 +6,9 @@
         <tr>
           <td><%= link_to approved.nickname, edit_user_path(approved) %></td>
           <td class="user-role"><%= approved.role %></td>
-          <td><%= form_for approved do |t| %>
-            <%= t.hidden_field :approved, :value => false %>
-            <%= t.submit "Suspend", class: 'btn btn-warning' %>
+          <td><%= form_for approved do |f| %>
+            <%= f.hidden_field :approved, :value => false %>
+            <%= f.submit "Suspend", class: 'btn btn-warning' %>
             <% end %>
           </td>
           <td><%= link_to "Delete", admin_destroy_user_path(approved), method: :delete, class: 'btn btn-danger',

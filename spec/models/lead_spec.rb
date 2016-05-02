@@ -24,6 +24,7 @@ RSpec.describe Lead, type: :model do
   # Extra colums for tracking functionality
   it { should respond_to(:last_dialed) }
   it { should respond_to(:dial_count) }
+  it { should respond_to(:killed) }
 
   # Delegated from Campaign model it belongs to
   it { should belong_to(:campaign) }
@@ -36,6 +37,13 @@ RSpec.describe Lead, type: :model do
     it "increases dial_count by 1" do
       my_lead.dial_lead
       expect(my_lead.dial_count).to eq 1
+    end
+  end
+
+  describe "#kill_lead" do
+    it "sets 'killed' to true" do
+      my_lead.kill_lead
+      expect(my_lead.killed).to eq true
     end
   end
 

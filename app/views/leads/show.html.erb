@@ -44,7 +44,15 @@
     </table>
   </div>
   <div class="col-md-4">
-    <h3>lead actions</h3>
+    <% if @lead.killed? %>
+      <h3 class="killed">Killed</h3>
+    <% else %>
+      <h3>lead actions</h3>
+      <%= form_for campaign_lead_path, method: :patch do |f| %>
+        <%= f.hidden_field :killed, :value => true %>
+        <%= f.submit "Kill", class: 'btn btn-danger' %>
+      <% end %>
+    <% end %>
   </div>
 </div>
 
