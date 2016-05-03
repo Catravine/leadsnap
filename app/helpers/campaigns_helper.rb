@@ -5,9 +5,14 @@ module CampaignsHelper
     Lead.where(campaign_id: campaign)
   end
 
+  def all_valid_leads(campaign, *code)
+    return all_leads(campaign, code).where(killed: false) if code.present?
+    all_leads(campaign).where(killed: false)
+  end
+
   def amt_leads(campaign, *code)
-    return all_leads(campaign).where(source_code: code).count if code.present?
-    all_leads(campaign).count
+    return all_valid_leads(campaign).where(source_code: code).count if code.present?
+    all_valid_leads(campaign).count
   end
 
   def sources(campaign)
