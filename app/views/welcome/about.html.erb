@@ -67,3 +67,58 @@ Caroline Courtney</a>.</p>
 </div>
 
 <hr/>
+
+<h3>Campaigns &amp; Leads</h3>
+
+<p>
+  Campaigns can be created/edited/deleted, and leads can be added, by exhaulted
+  <strong>admin</strong> users.  Leads can be added and associated with a
+  particular campaign, so that they can always be separated into different
+  projects, and different source codes within that project.
+</p>
+
+<p>
+  But lets say you're just a regular-joe user who wants to call some stuff;
+  all you have to do is go to the
+  <%= link_to "Campaigns", campaigns_path %> main menu, pick a project, and
+  see a breakdown of what there is within that project to call.  Choose one,
+  and the next lead is displayed.  Dial it, mark it if applicable,
+  and then hit <strong>Next Lead</strong> in the lower-right for the next one.
+  When you're done, stop.
+</p>
+
+<p>
+  Leads are ordered (which one you get for 'next') by how un-recently they
+  were dialed by default.  Something that has just been viewed and dialed will
+  return to the bottom of the heap.  Certain actions will take the lead out of
+  the stack for the foreseeable future:
+</p>
+
+<div class="row">
+  <div class="col-md-4">
+    <h4>Day</h4>
+    <p>
+      This lead's phone number is daytime-only, and will no longer show up in
+      the stack of evening calls.  If someone wants to call during the day,
+      they can access these specifically.
+    </p>
+  </div>
+  <div class="col-md-4">
+    <h4>Disconnect</h4>
+    <p>
+      None of this lead's numbers work right.  Either they're disconnected, or
+      they are the wrong person when you do reach someone.  A lead found to
+      have no  valid phone information will not show up again.
+    </p>
+  </div>
+  <div class="col-md-4">
+    <h4>Kill</h4>
+    <p>
+      Someone who is a valid lead with phone numbers and all that, but has
+      asked to be removed.  Also anyone who has left the applicable area or
+      died.
+    </p>
+  </div>
+</div>
+
+<hr/>
