@@ -22,3 +22,21 @@
 .lead-title p {
   margin-top: 15px;
 }
+
+.status form {
+  display: inline;
+  padding: 5px;
+}
+
+.status h3 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.unreached {
+  color: #999;
+}
+
+.day_lead {
+  color: #c90;
+}

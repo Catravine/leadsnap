@@ -1,5 +1,13 @@
 #Architectural Decision Record
 
+###2016-05-02
+`Lead` model is in place, with pertenent contact info fields and a campaign
+reference.  I'm thinking `killed` (already done), `disconnected`, and `daytime`
+should be extra boolean columns, but more complex situations, like no, sale,
+already sub'd(?), and of course callback, will be separate models since they
+have more associated information and would be more columns to the lead table
+than just the one boolean.
+
 ###2016-04-25
 `Campaign` CRUD is done, with authorization where only admins can create/
 update/delete, but everyone can view.  

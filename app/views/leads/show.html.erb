@@ -43,14 +43,16 @@
       </tr>
     </table>
   </div>
-  <div class="col-md-4">
-    <% if @lead.killed? %>
-      <h3 class="killed">Killed</h3>
-    <% else %>
-      <h3>lead actions</h3>
+  <div class="col-md-4 status">
+    <%= lead_status(@lead) %>
+    <%= form_for [@campaign, @lead], method: :patch do |f| %>
+      <%= f.hidden_field :killed, :value => true %>
+      <%= f.submit "Kill", class: 'btn btn-danger' %>
+    <% end %>
+      <% if !(@lead.day_lead?) %>
       <%= form_for [@campaign, @lead], method: :patch do |f| %>
-        <%= f.hidden_field :killed, :value => true %>
-        <%= f.submit "Kill", class: 'btn btn-danger' %>
+        <%= f.hidden_field :day_lead, :value => true %>
+        <%= f.submit "Day Lead", class: 'btn btn-warning' %>
       <% end %>
     <% end %>
   </div>

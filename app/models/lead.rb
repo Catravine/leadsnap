@@ -19,4 +19,9 @@ class Lead < ActiveRecord::Base
     self.save!
   end
 
+  def mark_as_day
+    self.day_lead = true
+    self.save!
+  end
+
 end

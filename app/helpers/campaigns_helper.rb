@@ -6,8 +6,8 @@ module CampaignsHelper
   end
 
   def all_valid_leads(campaign, *code)
-    return all_leads(campaign, code).where(killed: false) if code.present?
-    all_leads(campaign).where(killed: false)
+    return all_leads(campaign, code).where(killed: false, day_lead: false) if code.present?
+    all_leads(campaign).where(killed: false, day_lead: false)
   end
 
   def amt_leads(campaign, *code)

@@ -25,6 +25,7 @@ RSpec.describe Lead, type: :model do
   it { should respond_to(:last_dialed) }
   it { should respond_to(:dial_count) }
   it { should respond_to(:killed) }
+  it { should respond_to(:day_lead) }
 
   # Delegated from Campaign model it belongs to
   it { should belong_to(:campaign) }
@@ -44,6 +45,13 @@ RSpec.describe Lead, type: :model do
     it "sets 'killed' to true" do
       my_lead.kill_lead
       expect(my_lead.killed).to eq true
+    end
+  end
+
+  describe "#mark_as_day" do
+    it "sets 'day_lead' to true" do
+      my_lead.mark_as_day
+      expect(my_lead.day_lead).to eq true
     end
   end
 
