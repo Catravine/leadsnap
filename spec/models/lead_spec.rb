@@ -41,18 +41,4 @@ RSpec.describe Lead, type: :model do
     end
   end
 
-  describe "#kill_lead" do
-    it "sets 'killed' to true" do
-      my_lead.kill_lead
-      expect(my_lead.killed).to eq true
-    end
-  end
-
-  describe "#mark_as_day" do
-    it "sets 'day_lead' to true" do
-      my_lead.mark_as_day
-      expect(my_lead.day_lead).to eq true
-    end
-  end
-
 end
