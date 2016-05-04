@@ -15,13 +15,31 @@
     <table class="phone-numbers">
       <tr>
         <% if @lead.phone1 %>
-          <td><%= @lead.phone1 %><span class="glyphicon glyphicon-remove"></span></td>
+          <td>
+            <%= form_for [@campaign, @lead], method: :patch do |f| %>
+              <%= f.hidden_field :phone1, :value => "disc phone" %>
+              <%= f.submit "disc 1", class: 'btn btn-danger' %>
+            <% end %>
+            <%= @lead.phone1 %><span class="glyphicon glyphicon-remove"></span>
+          </td>
         <% end %>
         <% if @lead.phone2 %>
-          <td><%= @lead.phone2 %><span class="glyphicon glyphicon-remove"></span></td>
+          <td>
+            <%= form_for [@campaign, @lead], method: :patch do |f| %>
+              <%= f.hidden_field :phone2, :value => "disc phone" %>
+              <%= f.submit "disc 2", class: 'btn btn-danger' %>
+            <% end %>
+            <%= @lead.phone2 %><span class="glyphicon glyphicon-remove"></span>
+          </td>
         <% end %>
         <% if @lead.phone3 %>
-          <td><%= @lead.phone3 %><span class="glyphicon glyphicon-remove"></span></td>
+          <td>
+            <%= form_for [@campaign, @lead], method: :patch do |f| %>
+              <%= f.hidden_field :phone3, :value => "disc phone" %>
+              <%= f.submit "disc 3", class: 'btn btn-danger' %>
+            <% end %>
+            <%= @lead.phone3 %><span class="glyphicon glyphicon-remove"></span>
+          </td>
         <% end %>
       </tr>
     </table>

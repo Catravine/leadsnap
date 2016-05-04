@@ -41,7 +41,7 @@ class LeadsController < ApplicationController
   end
 
   def lead_params
-    params.require(:lead).permit(:killed, :day_lead)
+    params.require(:lead).permit(:killed, :day_lead, :phone1, :phone2, :phone3)
   end
 
 end
