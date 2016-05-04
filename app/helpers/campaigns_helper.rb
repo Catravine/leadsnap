@@ -10,6 +10,14 @@ module CampaignsHelper
     all_leads(campaign).where(killed: false, day_lead: false)
   end
 
+  def all_day_leads(campaign)
+    all_leads(campaign).where(day_lead: true, killed: false)
+  end
+
+  def amt_day_leads(campaign)
+    all_day_leads(campaign).count
+  end
+
   def amt_leads(campaign, *code)
     return all_valid_leads(campaign).where(source_code: code).count if code.present?
     all_valid_leads(campaign).count

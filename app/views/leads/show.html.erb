@@ -45,11 +45,13 @@
   </div>
   <div class="col-md-4 status">
     <%= lead_status(@lead) %>
-    <%= form_for [@campaign, @lead], method: :patch do |f| %>
-      <%= f.hidden_field :killed, :value => true %>
-      <%= f.submit "Kill", class: 'btn btn-danger' %>
+    <% if !(@lead.killed?) %>
+      <%= form_for [@campaign, @lead], method: :patch do |f| %>
+        <%= f.hidden_field :killed, :value => true %>
+        <%= f.submit "Kill", class: 'btn btn-danger' %>
+      <% end %>
     <% end %>
-      <% if !(@lead.day_lead?) %>
+    <% if !(@lead.day_lead?) %>
       <%= form_for [@campaign, @lead], method: :patch do |f| %>
         <%= f.hidden_field :day_lead, :value => true %>
         <%= f.submit "Day Lead", class: 'btn btn-warning' %>
@@ -65,8 +67,14 @@
     <h3>callback stuff</h3>
   </div>
   <div class="col-md-4">
-    <%= link_to "#{@lead.source_code} | Next Lead >>",
-      campaign_lead_path(@campaign, @campaign.next_lead(@lead.source_code)),
+    <% if @lead.day_lead? %>
+    <%= link_to "Day Leads | Next Lead >>",
+      campaign_lead_path(@campaign, @campaign.next_lead('day')),
       class: 'btn btn-success btn-lg' %>
+    <% else %>
+      <%= link_to "#{@lead.source_code} | Next Lead >>",
+        campaign_lead_path(@campaign, @campaign.next_lead(@lead.source_code)),
+        class: 'btn btn-success btn-lg' %>
+      <% end %>
   </div>
 </div>
