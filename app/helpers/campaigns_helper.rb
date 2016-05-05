@@ -27,15 +27,4 @@ module CampaignsHelper
     Lead.where(campaign_id: campaign.id).uniq.pluck(:source_code)
   end
 
-  def lead_breakdown(campaign)
-    list_items = String.new
-    sources =
-    Lead.where(campaign_id: campaign.id).uniq.pluck(:source_code)
-    sources.each do |code|
-      lead_count = Lead.where(campaign_id: campaign.id, source_code: code).count
-      list_items << "<li>#{code}: #{lead_count}</li>"
-    end
-    list_items.html_safe
-  end
-
 end

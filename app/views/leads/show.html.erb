@@ -17,7 +17,7 @@
         <% if @lead.phone1 %>
           <td>
             <%= form_for [@campaign, @lead], method: :patch do |f| %>
-              <%= f.hidden_field :phone1, :value => "disc phone" %>
+              <%= f.hidden_field :phone1, :value => "d#{@lead.phone1}" %>
               <%= f.submit "disc 1", class: 'btn btn-danger' %>
             <% end %>
             <%= @lead.phone1 %><span class="glyphicon glyphicon-remove"></span>

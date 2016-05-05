@@ -1,17 +1,21 @@
 <table class="lead-breakdown">
-  <tr><th>Source</th><th># leads</th><th>x dialed</th></tr>
-  <% sources(@campaign).each do |code| %>
-    <tr>
-      <td><%= link_to code, campaign_lead_path(@campaign, all_leads(@campaign, code).first) %>:</td>
-      <td><%= amt_leads(@campaign, code) %></td>
-      <td><%= all_leads(@campaign, code).average(:dial_count).floor %></td>
-    </tr>
-  <% end %>
-  <% if amt_day_leads(@campaign) > 0 %>
-    <tr>
-      <td><%= link_to "Day Leads", campaign_lead_path(@campaign, all_day_leads(@campaign).first) %>:</td>
-      <td><%= amt_day_leads(@campaign) %></td>
-      <td><%= all_day_leads(@campaign).average(:dial_count).floor %></td>
-    </tr>
-  <% end %>
+  <thead>
+    <tr><th>Source</th><th># leads</th><th>x dialed</th></tr>
+  </thead>
+  <tbody>
+    <% sources(@campaign).each do |code| %>
+      <tr>
+        <td><%= link_to code, campaign_lead_path(@campaign, all_leads(@campaign, code).first) %>:</td>
+        <td><%= amt_leads(@campaign, code) %></td>
+        <td><%= all_leads(@campaign, code).average(:dial_count).floor %></td>
+      </tr>
+    <% end %>
+    <% if amt_day_leads(@campaign) > 0 %>
+      <tr>
+        <td><%= link_to "Day Leads", campaign_lead_path(@campaign, all_day_leads(@campaign).first) %>:</td>
+        <td><%= amt_day_leads(@campaign) %></td>
+        <td><%= all_day_leads(@campaign).average(:dial_count).floor %></td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
