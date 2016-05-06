@@ -19,6 +19,20 @@ class LeadsController < ApplicationController
   def update
     @campaign = Campaign.find(params[:campaign_id])
     @lead = Lead.find(params[:id])
+    if lead_params.include?(:phone1) || lead_params.include?(:phone2) || lead_params.include?(:phone3)
+      @lead.assign_attributes(lead_params)
+      @lead.save!
+      @lead.disconnect_check
+      if @lead.disconnected?
+        if @lead.day_lead?
+          redirect_to campaign_lead_path(@campaign, @campaign.next_lead('day')) and return
+        else
+          redirect_to campaign_lead_path(@campaign, @campaign.next_lead(@lead.source_code)) and return
+        end
+      else
+        redirect_to campaign_lead_path(@campaign, @lead) and return
+      end
+    end
     if @lead.day_lead?
       redirect_to campaign_lead_path(@campaign, @campaign.next_lead('day'))
     else
@@ -31,7 +45,6 @@ class LeadsController < ApplicationController
     else
       flash.now[:alert] = "There was an error marking the lead. Please try again."
     end
-    @lead.disconnect_check
   end
 
   private
