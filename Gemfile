@@ -5,12 +5,13 @@ ruby '2.2.4'
 gem 'rails', '4.2.5'
 
 group :production do
-  gem 'pg'
+  #gem 'pg'
   gem 'rails_12factor'
 end
 
 group :development do
-  gem 'sqlite3'
+  #gem 'sqlite3'
+  #gem 'pg'
   gem 'quiet_assets'
   gem 'pry-rails'
   gem 'better_errors'
@@ -18,11 +19,13 @@ group :development do
 end
 
 group :development, :test do
+  #gem 'pg'
   gem 'rspec-rails', '~> 3.0'
   gem 'shoulda'
   gem 'factory_girl_rails', '~> 4.0'
 end
 
+gem 'pg'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
