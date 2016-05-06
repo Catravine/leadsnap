@@ -24,7 +24,7 @@ module CampaignsHelper
   end
 
   def sources(campaign)
-    Lead.where(campaign_id: campaign.id).uniq.pluck(:source_code)
+    Lead.where(campaign_id: campaign.id).pluck(:source_code).uniq
   end
 
 end

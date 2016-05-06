@@ -10,17 +10,15 @@ class Lead < ActiveRecord::Base
 
   def dial_lead
     self.dial_count += 1
-    self.last_dialed = Time.now
-    self.save!
+    update(last_dialed: Time.now)
   end
 
   def disconnect_check
-    if (phone1 == nil or phone1[0] == 'd') && (phone2 == nil or phone2[0] == 'd') && (phone3 == nil or phone3[0] == 'd')
-      self.disconnected = true
+    if [phone1, phone2, phone3].all? { |phone| phone == nil || phone[0] == 'd' }
+      update(disconnected: true)
     else
-      self.dial_count -= 1
+      update(dial_count: dial_count - 1)
     end
-    self.save!
   end
 
 end
