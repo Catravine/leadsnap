@@ -14,4 +14,11 @@ class Lead < ActiveRecord::Base
     self.save!
   end
 
+  def disconnect_check
+    if (phone1 == nil or phone1[0] == 'd') && (phone2 == nil or phone2[0] == 'd') && (phone3 == nil or phone3[0] == 'd')
+      self.disconnected = true
+      self.save!
+    end
+  end
+
 end

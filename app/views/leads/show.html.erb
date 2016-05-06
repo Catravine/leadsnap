@@ -13,35 +13,58 @@
 <div class="row">
   <div class="col-md-8">
     <table class="phone-numbers">
-      <tr>
-        <% if @lead.phone1 %>
-          <td>
-            <%= form_for [@campaign, @lead], method: :patch do |f| %>
-              <%= f.hidden_field :phone1, :value => "d#{@lead.phone1}" %>
-              <%= f.submit "disc 1", class: 'btn btn-danger' %>
-            <% end %>
-            <%= @lead.phone1 %><span class="glyphicon glyphicon-remove"></span>
-          </td>
-        <% end %>
-        <% if @lead.phone2 %>
-          <td>
-            <%= form_for [@campaign, @lead], method: :patch do |f| %>
-              <%= f.hidden_field :phone2, :value => "disc phone" %>
-              <%= f.submit "disc 2", class: 'btn btn-danger' %>
-            <% end %>
-            <%= @lead.phone2 %><span class="glyphicon glyphicon-remove"></span>
-          </td>
-        <% end %>
-        <% if @lead.phone3 %>
-          <td>
-            <%= form_for [@campaign, @lead], method: :patch do |f| %>
-              <%= f.hidden_field :phone3, :value => "disc phone" %>
-              <%= f.submit "disc 3", class: 'btn btn-danger' %>
-            <% end %>
-            <%= @lead.phone3 %><span class="glyphicon glyphicon-remove"></span>
-          </td>
-        <% end %>
-      </tr>
+      <thead>
+        <tr><td>phone 1</td><td>phone 2</td><td>phone 3</td></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <% if @lead.phone1 %>
+            <td>
+              <% if @lead.phone1[0] == 'd' %>
+                <span class="disconnected-phone"><%= @lead.phone1[1..-1] %></span>
+              <% else %>
+                <%= @lead.phone1 %>
+                <%= form_for [@campaign, @lead], method: :patch do |f| %>
+                  <%= f.hidden_field :phone1, :value => "d#{@lead.phone1}" %>
+                  <%= button_tag(type: 'submit', class: 'btn btn-danger') do %>
+                    <span class="glyphicon glyphicon-remove"></span>
+                  <% end %>
+                <% end %>
+              <% end %>
+            </td>
+          <% end %>
+          <% if @lead.phone2 %>
+            <td>
+              <% if @lead.phone2[0] == 'd' %>
+                <span class="disconnected-phone"><%= @lead.phone2[1..-1] %></span>
+              <% else %>
+                <%= @lead.phone2 %>
+                <%= form_for [@campaign, @lead], method: :patch do |f| %>
+                  <%= f.hidden_field :phone2, :value => "d#{@lead.phone2}" %>
+                  <%= button_tag(type: 'submit', class: 'btn btn-danger') do %>
+                    <span class="glyphicon glyphicon-remove"></span>
+                  <% end %>
+                <% end %>
+              <% end %>
+            </td>
+          <% end %>
+          <% if @lead.phone3 %>
+            <td>
+              <% if @lead.phone3[0] == 'd' %>
+                <span class="disconnected-phone"><%= @lead.phone3[1..-1] %></span>
+              <% else %>
+                <%= @lead.phone3 %>
+                <%= form_for [@campaign, @lead], method: :patch do |f| %>
+                  <%= f.hidden_field :phone3, :value => "d#{@lead.phone3}" %>
+                  <%= button_tag(type: 'submit', class: 'btn btn-danger') do %>
+                    <span class="glyphicon glyphicon-remove"></span>
+                  <% end %>
+                <% end %>
+              <% end %>
+            </td>
+          <% end %>
+        </tr>
+      </tbody>
     </table>
 
     <p class="lead-contact">
@@ -63,17 +86,8 @@
   </div>
   <div class="col-md-4 status">
     <%= lead_status(@lead) %>
-    <% if !(@lead.killed?) %>
-      <%= form_for [@campaign, @lead], method: :patch do |f| %>
-        <%= f.hidden_field :killed, :value => true %>
-        <%= f.submit "Kill", class: 'btn btn-danger' %>
-      <% end %>
-    <% end %>
-    <% if !(@lead.day_lead?) %>
-      <%= form_for [@campaign, @lead], method: :patch do |f| %>
-        <%= f.hidden_field :day_lead, :value => true %>
-        <%= f.submit "Day Lead", class: 'btn btn-warning' %>
-      <% end %>
+    <% if !(@lead.killed? || @lead.disconnected?) %>
+      <%= render partial: 'lead_actions', locals: { campaign: @campaign, lead: @lead } %>
     <% end %>
   </div>
 </div>

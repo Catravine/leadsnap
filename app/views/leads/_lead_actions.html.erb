@@ -1,0 +1,12 @@
+<% if !(lead.killed?) %>
+  <%= form_for [campaign, lead], method: :patch do |f| %>
+    <%= f.hidden_field :killed, :value => true %>
+    <%= f.submit "Kill", class: 'btn btn-danger' %>
+  <% end %>
+<% end %>
+<% if !(lead.day_lead?) %>
+  <%= form_for [campaign, lead], method: :patch do |f| %>
+    <%= f.hidden_field :day_lead, :value => true %>
+    <%= f.submit "Day Lead", class: 'btn btn-warning' %>
+  <% end %>
+<% end %>

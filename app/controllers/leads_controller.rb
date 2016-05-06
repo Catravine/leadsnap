@@ -31,6 +31,7 @@ class LeadsController < ApplicationController
     else
       flash.now[:alert] = "There was an error marking the lead. Please try again."
     end
+    @lead.disconnect_check
   end
 
   private

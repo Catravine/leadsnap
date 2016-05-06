@@ -8,9 +8,33 @@
   padding: 5px;
 }
 
+.phone-numbers thead {
+  display: none;
+}
+
+.phone-numbers .btn {
+  border: none;
+  background: transparent;
+  padding: 0;
+  display: inline;
+  padding: 1px;
+  margin: 0 0 4px 0;
+}
+
+.phone-numbers form {
+  display: inline;
+  padding: 0;
+  margin: 0;
+}
+
 .phone-numbers .glyphicon, .killed {
   padding: 5px;
   color: #900;
+}
+
+.disconnected-phone {
+  text-decoration: line-through;
+  color: #999;
 }
 
 .lead-contact {

@@ -26,6 +26,7 @@ RSpec.describe Lead, type: :model do
   it { should respond_to(:dial_count) }
   it { should respond_to(:killed) }
   it { should respond_to(:day_lead) }
+  it { should respond_to(:disconnected) }
 
   # Delegated from Campaign model it belongs to
   it { should belong_to(:campaign) }
