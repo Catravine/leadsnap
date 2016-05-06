@@ -1,5 +1,10 @@
 #Architectural Decision Record
 
+###2016-05-6
+Trying `pg_search` gem, and so I'm also changing the development db to postgres.
+DB will have to be reseeded with the ~3000 SotP leads.
+Leads can be killed, disc'd, or daytime, and the project is backed up.
+
 ###2016-05-02
 `Lead` model is in place, with pertenent contact info fields and a campaign
 reference.  I'm thinking `killed` (already done), `disconnected`, and `daytime`
