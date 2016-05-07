@@ -15,4 +15,8 @@ module LeadsHelper
     return status.html_safe
   end
 
+  def next_lead_button(lead)
+    lead.day_lead? ? "Day Leads" : "#{lead.source_code}"
+  end
+
 end
