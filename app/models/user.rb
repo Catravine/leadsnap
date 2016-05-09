@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   before_save :set_nickname
   before_save { self.role ||= :standard }
 
-  has_many :callbacks
+  has_many :callbacks, dependent: :destroy
 
   enum role: [:standard, :manager, :admin]
 

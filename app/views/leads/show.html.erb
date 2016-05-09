@@ -64,7 +64,11 @@
 
 <div class="row">
   <div class="col-md-8">
-    <h3>callback stuff</h3>
+    <% if Callback.find_by(lead: @lead) %>
+      <%= render partial: 'callbacks/edit_callback', locals: { lead: @lead } %>
+    <% else %>
+      create callback
+    <% end %>
   </div>
   <div class="col-md-4">
     <%= link_to "#{next_lead_button(@lead)} | Next Lead >>",
