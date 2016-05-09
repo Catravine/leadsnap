@@ -1,5 +1,5 @@
 class Campaign < ActiveRecord::Base
-  has_many :leads
+  has_many :leads, dependent: :destroy
 
   def next_lead(current_lead)
     return leads.where(killed: false, day_lead: true, disconnected: false).first if current_lead.day_lead?

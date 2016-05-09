@@ -28,6 +28,9 @@ RSpec.describe Lead, type: :model do
   it { should respond_to(:day_lead) }
   it { should respond_to(:disconnected) }
 
+  # Callback info
+  it { should have_one(:callback) }
+
   # Delegated from Campaign model it belongs to
   it { should belong_to(:campaign) }
   it { should respond_to(:campaign_name)}

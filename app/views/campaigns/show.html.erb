@@ -23,7 +23,7 @@
       ...
       <h3>Edit this Campaign</h3>
       <%= link_to "Update", edit_campaign_path(@campaign), class: 'btn btn-success' %>
-      <%= link_to "Delete", @campaign, method: :delete, class: 'btn btn-danger', data: {confirm: 'Are you sure you want to delete this campaign?'} %>
+      <%= link_to "Delete", @campaign, method: :delete, class: 'btn btn-danger', data: {confirm: 'Are you sure you want to delete this campaign and all leads?'} %>
     <% end %>
   </div>
 </div>

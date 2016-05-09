@@ -3,6 +3,7 @@ class Lead < ActiveRecord::Base
   include PgSearch
 
   belongs_to :campaign
+  has_one :callback
 
   default_scope { order("leads.last_dialed ASC") }
 
