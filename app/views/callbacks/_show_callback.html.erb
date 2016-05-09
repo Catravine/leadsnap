@@ -1,0 +1,5 @@
+<div id="show-callback">
+  <h3><%= link_to callback.user_nickname, profile_path(callback.user) %>'s Callback:</h3>
+  <p><strong>Date:</strong> &nbsp; <%= callback.time.strftime('%a, %b %d') %></p>
+  <p><strong>Notes:</strong> &nbsp; <%= callback.notes %></p>
+</div>

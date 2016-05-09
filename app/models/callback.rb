@@ -6,6 +6,7 @@ class Callback < ActiveRecord::Base
   delegate :nickname, to: :user, prefix: true
   delegate :campaign_id, to: :lead, prefix: true
   delegate :campaign, to: :lead, prefix: true
+  delegate :source_code, to: :lead, prefix: true
   delegate :name1, to: :lead, prefix: true
   delegate :name2, to: :lead, prefix: true
   delegate :phone1, to: :lead, prefix: true

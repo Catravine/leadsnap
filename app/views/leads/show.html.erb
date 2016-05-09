@@ -65,7 +65,7 @@
 <div class="row">
   <div class="col-md-8">
     <% if Callback.find_by(lead: @lead) %>
-      <%= render partial: 'callbacks/edit_callback', locals: { lead: @lead } %>
+      <%= render partial: 'callbacks/show_callback', locals: { lead: @lead, callback: Callback.find_by(lead: @lead) } %>
     <% else %>
       create callback
     <% end %>
