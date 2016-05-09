@@ -1,9 +1,14 @@
 Rails.application.routes.draw do
 
+  get 'search_results/index'
+
   # Campaigns (of leads)
   resources :campaigns do
     resources :leads
   end
+
+  # pg_search results page(s)
+  resources :search_results, only: [:index]
 
   # 'Administrate' gem dashboards
   namespace :admin do

@@ -1,0 +1,7 @@
+<h1><%= search_results_title %></h1>
+<ul>
+  <%= "<li>No Results</li>".html_safe if @results.count == 0 %>
+  <% @results.each do |result| %>
+    <li><%= link_to "#{result.name1} #{result.name2}", campaign_lead_path(result.campaign_id, result.id) %> | <%= "#{result.phone1} #{result.phone2} #{result.phone3}" %></li>
+  <% end %>
+</ul>
