@@ -1,19 +1,16 @@
-<h1><%= @user.nickname %><small> - <%= @user.role %> user</small></h1>
-<p>
-  <%= link_to 'Edit profile', edit_user_registration_path %>:
-  <%= @user.fullname %>: <%= @user.phone %> | <%= @user.email %>
-</p>
+<div class="row">
+  <div class="col-md-8">
+    <h1><%= @user.nickname %><small> - <%= @user.role %> user</small></h1>
+    <p>
+      <%= link_to 'Edit profile', edit_user_registration_path %>:
+      <%= @user.fullname %>: <%= @user.phone %> | <%= @user.email %>
+    </p>
 
-<h2>Search Leads</h2>
+    <hr/>
 
-<h3>by Name:</h3>
-<%= form_tag search_results_index_path, method: :get do %>
-  <%= text_field_tag :name_query, params[:name_query] %>
-  <%= submit_tag "GO", name: nil %>
-<% end %>
-
-<h3>by Phone:</h3>
-<%= form_tag search_results_index_path, method: :get do %>
-  <%= text_field_tag :phone_query, params[:phone_query] %>
-  <%= submit_tag "GO", name: nil %>
-<% end %>
+    <%= render partial: 'search_results/search_form' %>
+  </div>
+  <div class="col-md-4">
+    <h3>Callbacks</h3>
+  </div>
+</div>
