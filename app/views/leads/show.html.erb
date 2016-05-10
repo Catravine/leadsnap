@@ -65,14 +65,15 @@
 <div class="row">
   <div class="col-md-8">
     <% if Callback.find_by(lead: @lead) %>
-      <%= render partial: 'callbacks/show_callback', locals: { lead: @lead, callback: Callback.find_by(lead: @lead) } %>
+      <%= render template: 'callbacks/show', locals: { lead: @lead, callback: Callback.find_by(lead: @lead) } %>
     <% else %>
-      create callback
+      <%= render template: 'callbacks/new', locals: { lead: @lead } %>
     <% end %>
   </div>
   <div class="col-md-4">
     <%= link_to "#{next_lead_button(@lead)} | Next Lead >>",
       campaign_lead_path(@campaign, @campaign.next_lead(@lead)),
       class: 'btn btn-success btn-lg' %>
+      <p>Dial Count: <%= @lead.dial_count %></p>
   </div>
 </div>
