@@ -14,7 +14,11 @@ class SearchResultsController < ApplicationController
   private
 
   def phone_parse(phone)
-    "(" << phone[0..2] << ") " << phone[3..5] << "-" << phone[6..9]
+    if phone.length > 5
+      "(" << phone[0..2] << ") " << phone[3..5] << "-" << phone[6..9]
+    else
+      phone
+    end
   end
 
 end
