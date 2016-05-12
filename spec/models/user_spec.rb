@@ -14,7 +14,7 @@ RSpec.describe User, type: :model do
   it { should respond_to(:phone) }
   it { should respond_to(:approved) }
 
-  it { should have_many(:callbacks) }
+  it { should have_many(:recalls) }
 
   describe "user roles" do
     it "is standard user by default" do

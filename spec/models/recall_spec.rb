@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Callback, type: :model do
+RSpec.describe Recall, type: :model do
 
   let(:my_user) { create(:user) }
   let(:my_campaign) { create(:campaign, name: "Fake Campaign") }

@@ -64,10 +64,10 @@
 
 <div class="row">
   <div class="col-md-8">
-    <% if Callback.find_by(lead: @lead) %>
-      <%= render template: 'callbacks/show', locals: { lead: @lead, callback: Callback.find_by(lead: @lead) } %>
+    <% if Recall.find_by(lead: @lead) %>
+      <%= render template: 'recalls/show', locals: { lead: @lead, callback: Recall.find_by(lead: @lead) } %>
     <% else %>
-      <%= render template: 'callbacks/new', locals: { lead: @lead } %>
+      <%= render template: 'recalls/new', locals: { lead: @lead } %>
     <% end %>
   </div>
   <div class="col-md-4">

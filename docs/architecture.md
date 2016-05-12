@@ -1,6 +1,11 @@
 #Architectural Decision Record
 
-###2016-05-6
+###2016-05-10
+Had to change the name of the `callback` model to `recall`; Callback is a class
+within the Active Support package, and was causing `number or arguments error
+(0 for 5)` when trying to do `Callback.new`.  
+
+##2016-05-6
 Trying `pg_search` gem, and so I'm also changing the development db to postgres.
 DB will have to be reseeded with the ~3000 SotP leads.
 Leads can be killed, disc'd, or daytime, and the project is backed up.

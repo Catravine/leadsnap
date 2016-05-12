@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :callback do
+  factory :recall do
     user nil
     lead nil
     time "2016-05-09 13:19:39"

@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
 
   before_action :authenticate_user!
 
-  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+  #rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   private
