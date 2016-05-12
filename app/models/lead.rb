@@ -3,7 +3,7 @@ class Lead < ActiveRecord::Base
   include PgSearch
 
   belongs_to :campaign
-  has_one :callback, dependent: :destroy
+  has_one :recall, dependent: :destroy
 
   default_scope { order("leads.last_dialed ASC") }
 

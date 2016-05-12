@@ -11,8 +11,8 @@
     <%= render partial: 'search_results/search_form' %>
   </div>
   <div class="col-md-4 user-callbacks">
-    <h3>Callbacks: <%= "none" if Callback.where(user: @user).count == 0 %></h3>
-    <% Callback.where(user: @user).each do |cb| %>
+    <h3>Callbacks: <%= "none" if Recall.where(user: @user).count == 0 %></h3>
+    <% Recall.where(user: @user).each do |cb| %>
       <div>
         <p class="cb-name"><%= link_to cb.lead_name1, campaign_lead_path(cb.lead_campaign_id, cb.lead) %></p>
         <p class="cb-campaign"><%= "#{cb.lead_campaign.name}  #{cb.lead_source_code}" %></p>

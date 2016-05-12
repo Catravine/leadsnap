@@ -7,8 +7,8 @@ Rails.application.routes.draw do
     resources :leads
   end
 
-  # users' callbacks
-  resources :callbacks
+  # users' callbacks (`Callback` is already used in ActiveSupport)
+  resources :recalls
 
   # pg_search results page(s)
   resources :search_results, only: [:index]

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe CallbacksController, type: :controller do
+RSpec.describe RecallsController, type: :controller do
 
   let(:my_user) { create(:user) }
   let(:my_campaign) { create(:campaign) }

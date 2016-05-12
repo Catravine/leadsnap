@@ -1,4 +1,4 @@
-class Callback < ActiveRecord::Base
+class Recall < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :lead
