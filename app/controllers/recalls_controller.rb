@@ -6,17 +6,17 @@ class RecallsController < ApplicationController
 
  def create
    @recall = Recall.new
-   @lead = Lead.find(444)
+   @current_lead_id = params[:recall][:current_lead_id]
    @recall.user = current_user
-   @recall.lead = @lead
+   @recall.lead = Lead.find_by(id: @current_lead_id)
    @recall.time = Time.now
    @recall.notes = params[:recall][:notes]
    if @recall.save
-     flash[:notice] = "CBCC hee hee. #{current_user.nickname}.  *#{params[:lead]}* is the lead."
+     flash[:notice] = "Callback created for user: #{current_user.nickname}."
    else
-     flash[:alert] = "There was an error saving CB.  Please try again."
+     flash[:alert] = "There was an error saving this Callback.  Please try again."
    end
-   redirect_to campaign_lead_path(@lead.campaign, @lead)
+   redirect_to request.referrer
  end
 
  private

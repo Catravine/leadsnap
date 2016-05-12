@@ -19,7 +19,6 @@
           <li><%= link_to "Campaigns", campaigns_path %></li>
           <% if policy(User).index? %>
             <li><%= link_to new_users?, users_path %></li>
-            <li><%= link_to "(Administrate gem)", "/admin", data: { 'no-turbolink' => true } %></li>
           <% end %>
         <% else %>
           <li><%= link_to "Sign In", root_path %></li>

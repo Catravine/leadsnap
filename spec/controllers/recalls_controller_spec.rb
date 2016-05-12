@@ -23,19 +23,19 @@ RSpec.describe RecallsController, type: :controller do
       sign_in my_user
     end
 
-    # describe "GET #new" do
-    #   it "instantiates @callback" do
-    #     get :new
-    #     expect(assigns(:callback)).not_to be_nil
-    #   end
-    # end
-    #
-    # describe "POST #create" do
-    #   it "assigns the new callback to @callback" do
-    #     post :create, callback: { user: my_user, lead: my_lead }
-    #     expect(assigns(:callback)).to eq Callback.last
-    #   end
-    # end
+    describe "GET #new" do
+      it "instantiates @recall" do
+        get :new
+        expect(assigns(:recall)).not_to be_nil
+      end
+    end
+
+    describe "POST #create" do
+      it "assigns the new recall to @recall" do
+        post :create, recall: { user: my_user, lead: my_lead }
+        expect(assigns(:recall)).to eq Recall.last
+      end
+    end
 
     describe "PUT #update" do
     end

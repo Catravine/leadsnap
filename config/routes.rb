@@ -13,12 +13,6 @@ Rails.application.routes.draw do
   # pg_search results page(s)
   resources :search_results, only: [:index]
 
-  # 'Administrate' gem dashboards
-  namespace :admin do
-    resources :users
-    root to: "users#index"
-  end
-
   # Users and profiles
   devise_for :users, :controllers => {
     registrations: 'registrations',
