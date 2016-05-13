@@ -5,7 +5,7 @@ RSpec.describe RecallsController, type: :controller do
   let(:my_user) { create(:user) }
   let(:my_campaign) { create(:campaign) }
   let(:my_lead) { create(:lead, campaign_id: my_campaign) }
-  let(:my_callback) { create(:callback, user: my_user, lead: my_lead, time: Time.now, notes: "fake notes") }
+  let(:my_recall) { create(:recall, user: my_user, lead: my_lead, time: Time.now, notes: "fake notes") }
 
   context "guest user" do
     describe "non-signed in stuff" do
@@ -30,14 +30,11 @@ RSpec.describe RecallsController, type: :controller do
       end
     end
 
-    describe "POST #create" do
-      it "assigns the new recall to @recall" do
-        post :create, recall: { user: my_user, lead: my_lead }
-        expect(assigns(:recall)).to eq Recall.last
-      end
-    end
-
     describe "DELETE #destroy" do
+      it "deletes the recall" do
+        delete :destroy, { id: my_recall.id }
+        expect(Recall.where({id: my_recall.id}).count).to eq 0
+      end
     end
   end
 
