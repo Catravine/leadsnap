@@ -10,7 +10,6 @@ class RecallsController < ApplicationController
    current_lead_id = params[:recall][:current_lead_id]
    @recall.user = current_user
    @recall.lead = Lead.find(current_lead_id)
-   @recall.time = Date.strptime(params[:recall][:time], "%m/%d/%Y")
    if @recall.save
      flash[:notice] = "Callback created for user: #{current_user.nickname}."
    else
@@ -26,7 +25,6 @@ class RecallsController < ApplicationController
  def update
    @recall = Recall.find(params[:id])
    @recall.assign_attributes(recall_params)
-   @recall.time = Date.strptime(params[:recall][:time], "%m/%d/%Y") if recall_params.include?(:time)
    if @recall.save
      flash[:notice] = "Callback updated."
    else
