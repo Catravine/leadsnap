@@ -3,6 +3,8 @@ class Recall < ActiveRecord::Base
   belongs_to :user
   belongs_to :lead
 
+  default_scope { order("recalls.time ASC") }
+
   delegate :nickname, to: :user, prefix: true
   delegate :campaign_id, to: :lead, prefix: true
   delegate :campaign, to: :lead, prefix: true
