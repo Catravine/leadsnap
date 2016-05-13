@@ -37,9 +37,6 @@ RSpec.describe RecallsController, type: :controller do
       end
     end
 
-    describe "PUT #update" do
-    end
-
     describe "DELETE #destroy" do
     end
   end
