@@ -16,7 +16,7 @@ class Lead < ActiveRecord::Base
   pg_search_scope :search_phone, :against => [:phone1, :phone2, :phone3]
 
   def dial_lead
-    self.dial_count += 1
+    self.dial_count += 1 unless Recall.find_by(lead: self)
     update(last_dialed: Time.now)
   end
 

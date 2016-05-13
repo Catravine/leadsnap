@@ -14,9 +14,14 @@
     <h3>Callbacks: <%= "none" if Recall.where(user: @user).count == 0 %></h3>
     <% Recall.where(user: @user).each do |cb| %>
       <div>
+        <% if cb.user == current_user %>
+          <span class="cb-remove">
+            <%= link_to "", cb, method: :delete, class: 'glyphicon glyphicon-remove' %>
+          </span>
+        <% end %>
         <p class="cb-name"><%= link_to cb.lead_name1, campaign_lead_path(cb.lead_campaign_id, cb.lead) %></p>
         <p class="cb-campaign"><%= "#{cb.lead_campaign.name}  #{cb.lead_source_code}" %></p>
-        <p><strong>CB: <%= cb.time %></strong> <%= "#{cb.notes}" %></p>
+        <p><strong>CB: <%= cb.time.strftime("%-m/%-d") %></strong> <%= "#{cb.notes}" %></p>
       </div>
     <% end %>
   </div>
