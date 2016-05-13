@@ -5,12 +5,11 @@ class RecallsController < ApplicationController
  end
 
  def create
-   @recall = Recall.new
-   @current_lead_id = params[:recall][:current_lead_id]
+   @recall = Recall.new(recall_params)
+   current_lead_id = params[:recall][:current_lead_id]
    @recall.user = current_user
-   @recall.lead = Lead.find_by(id: @current_lead_id)
-   @recall.time = Time.now
-   @recall.notes = params[:recall][:notes]
+   @recall.lead = Lead.find(current_lead_id)
+   @recall.time = Date.strptime(params[:recall][:time], "%m/%d/%Y")
    if @recall.save
      flash[:notice] = "Callback created for user: #{current_user.nickname}."
    else
@@ -21,8 +20,8 @@ class RecallsController < ApplicationController
 
  private
 
- # def recall_params
- #   params.require(:recall).permit(:user, :lead, :time, :notes)
- # end
+ def recall_params
+   params.require(:recall).permit(:user, :lead, :time, :notes)
+ end
 
 end
