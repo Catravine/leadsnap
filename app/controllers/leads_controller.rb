@@ -28,6 +28,11 @@ class LeadsController < ApplicationController
     @lead.update(lead_params)
   end
 
+  def import
+    count = Lead.import params[:file]
+    redirect_to campaign_leads_path(1), notice: "imported #{count} users."
+  end
+
   private
 
   def record_not_found
