@@ -7,15 +7,17 @@ class RecallsController < ApplicationController
 
  def create
    @recall = Recall.new(recall_params)
-   current_lead_id = params[:recall][:current_lead_id]
+   @current_lead = Lead.find(params[:recall][:current_lead_id])
+   @next_lead = @current_lead.campaign.next_lead(@current_lead)
    @recall.user = current_user
-   @recall.lead = Lead.find(current_lead_id)
+   @recall.lead = @current_lead
    if @recall.save
-     flash[:notice] = "Callback created for user: #{current_user.nickname}."
+     flash[:notice] = "#{current_user.nickname} saved #{@current_lead.name1} as their Callback."
+     redirect_to campaign_lead_path(@current_lead.campaign, @next_lead)
    else
      flash[:alert] = "There was an error saving this Callback.  Please try again."
+     redirect_to request.referrer
    end
-   redirect_to request.referrer
  end
 
  def edit
@@ -39,7 +41,7 @@ class RecallsController < ApplicationController
  def destroy
    @recall = Recall.find(params[:id])
    if @recall.destroy
-     flash[:notice] = "Callback given up."
+     flash[:notice] = "Callback for #{@recall.lead.name1} given up."
    else
      flash.now[:alert] = "There was an error removing this callback."
    end
