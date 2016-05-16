@@ -7,6 +7,12 @@ Rails.application.routes.draw do
     resources :leads
   end
 
+  resources :leads do
+    collection do
+      post :import
+    end
+  end
+
   # users' callbacks (`Callback` is already used in ActiveSupport)
   resources :recalls
 

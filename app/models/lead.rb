@@ -15,6 +15,28 @@ class Lead < ActiveRecord::Base
   pg_search_scope :search_name, :against => [:name1, :name2]
   pg_search_scope :search_phone, :against => [:phone1, :phone2, :phone3]
 
+  def self.assign_from_row(row)
+    lead = Lead.where(account: row[:account]).first_or_initialize
+    lead.assign_attributes row.to_hash.slice(:name1, :name2,
+      :address1, :address2, :city, :state, :zip, :phone1, :phone2,
+      :phone3, :source_code)
+    lead
+  end
+
+  def self.import(file, campaign_id)
+    counter = 0
+    CSV.foreach(file.path, headers: true, header_converters: :symbol) do |row|
+      lead = Lead.assign_from_row(row)
+      lead.campaign_id = campaign_id
+      if lead.save
+        counter += 1
+      else
+        puts "#{lead.account} - #{lead.errors.full_messages.join(",")}" if lead.errors.any?
+      end
+    end
+    counter
+  end
+
   def dial_lead
     self.dial_count += 1 unless Recall.find_by(lead: self)
     update(last_dialed: Time.now)

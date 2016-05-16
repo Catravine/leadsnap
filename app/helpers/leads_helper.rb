@@ -16,6 +16,7 @@ module LeadsHelper
   end
 
   def next_lead_button(lead)
+    return "#{lead.recall.user.nickname}'s CBs" if lead.recall
     lead.day_lead? ? "Day Leads" : "#{lead.source_code}"
   end
 
