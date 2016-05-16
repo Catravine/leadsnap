@@ -20,7 +20,12 @@
     <% end %>
     <% if policy(Campaign).edit? %>
       <h3>Add Leads</h3>
-      ...
+      <%= form_tag import_leads_path, multipart: true do %>
+        <%= hidden_field_tag :campaign_id, @campaign.id %>
+        <%= file_field_tag :file %>
+        <%= submit_tag "Upload" %>
+      <% end %>
+
       <h3>Edit this Campaign</h3>
       <%= link_to "Update", edit_campaign_path(@campaign), class: 'btn btn-success' %>
       <%= link_to "Delete", @campaign, method: :delete, class: 'btn btn-danger', data: {confirm: 'Are you sure you want to delete this campaign and all leads?'} %>

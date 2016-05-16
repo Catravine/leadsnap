@@ -29,8 +29,8 @@ class LeadsController < ApplicationController
   end
 
   def import
-    count = Lead.import params[:file]
-    redirect_to campaign_leads_path(1), notice: "imported #{count} users."
+    count = Lead.import(params[:file], params[:campaign_id])
+    redirect_to campaign_path(params[:campaign_id]), notice: "imported #{count} leads to (campaign)."
   end
 
   private

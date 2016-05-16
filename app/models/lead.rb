@@ -23,10 +23,11 @@ class Lead < ActiveRecord::Base
     lead
   end
 
-  def self.import(file)
+  def self.import(file, campaign_id)
     counter = 0
     CSV.foreach(file.path, headers: true, header_converters: :symbol) do |row|
       lead = Lead.assign_from_row(row)
+      lead.campaign_id = campaign_id
       if lead.save
         counter += 1
       else
