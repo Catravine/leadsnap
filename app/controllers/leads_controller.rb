@@ -9,6 +9,7 @@ class LeadsController < ApplicationController
   def show
     @campaign = Campaign.find(params[:campaign_id])
     @lead = Lead.find(params[:id])
+    @last_dial = @lead.last_dialed
     @lead.dial_lead
   end
 
@@ -24,7 +25,11 @@ class LeadsController < ApplicationController
       @lead.disconnect_check
       redirect_to campaign_lead_path(@campaign, @lead) and return unless @lead.disconnected?
     end
-    redirect_to campaign_lead_path(@campaign, @campaign.next_lead(@lead))
+    if @campaign.next_lead(@lead)
+      redirect_to campaign_lead_path(@campaign, @campaign.next_lead(@lead))
+    else # back to campaign if no more leads w/ that source after disc
+      redirect_to campaign_path(@campaign)
+    end
     @lead.update(lead_params)
   end
 

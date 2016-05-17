@@ -4,11 +4,13 @@
   </thead>
   <tbody>
     <% sources(@campaign).each do |code| %>
-      <tr>
-        <td><%= link_to code, campaign_lead_path(@campaign, all_leads(@campaign, code).find { |l| l.recall.nil? }) %>:</td>
-        <td><%= amt_leads(@campaign, code) %></td>
-        <td><%= all_leads(@campaign, code).average(:dial_count).floor %></td>
-      </tr>
+      <% if all_leads(@campaign, code).find { |l| l.recall.nil? } %>
+        <tr>
+          <td><%= link_to code, campaign_lead_path(@campaign, all_leads(@campaign, code).find { |l| l.recall.nil? }) %>:</td>
+          <td><%= amt_leads(@campaign, code) %></td>
+          <td><%= all_leads(@campaign, code).average(:dial_count).floor %></td>
+        </tr>
+      <% end %>
     <% end %>
     <% if amt_day_leads(@campaign) > 0 %>
       <tr>

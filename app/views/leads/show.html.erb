@@ -71,9 +71,15 @@
     <% end %>
   </div>
   <div class="col-md-4">
-    <%= link_to "#{next_lead_button(@lead)} | Next Lead >>",
-      campaign_lead_path(@campaign, @campaign.next_lead(@lead)),
-      class: 'btn btn-success btn-lg' %>
-      <p>Dial Count: <%= @lead.dial_count %></p>
+    <% if @campaign.next_lead(@lead) %>
+      <%= link_to "#{next_lead_button(@lead)} | Next Lead >>",
+        campaign_lead_path(@campaign, @campaign.next_lead(@lead)),
+        class: 'btn btn-success btn-lg' %>
+    <% else %>
+      <%= link_to "#{@campaign.name} - Main", campaign_path(@campaign),
+        class: 'btn btn-success btn-lg' %>
+    <% end %>
+      <p>Dialed <%= @lead.dial_count %> times;
+        Last: <%= time_ago_in_words(@last_dial) %> ago.</p>
   </div>
 </div>
