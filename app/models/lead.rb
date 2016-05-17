@@ -15,27 +15,22 @@ class Lead < ActiveRecord::Base
   pg_search_scope :search_name, :against => [:name1, :name2]
   pg_search_scope :search_phone, :against => [:phone1, :phone2, :phone3]
 
-  # Overrides where account numbers happen to be the same
-  # def self.assign_from_row(row)
-  #   lead = Lead.where(account: row[:account]).first_or_initialize
-  #   lead.assign_attributes row.to_hash.slice(:name1, :name2,
-  #     :address1, :address2, :city, :state, :zip, :phone1, :phone2,
-  #     :phone3, :source_code)
-  #   lead
-  # end
-
-  # doesn't override existing records - makes a new one
-  def self.assign_from_row(row)
-    lead = Lead.create(row.to_hash.slice(:account, :name1, :name2,
-      :address1, :address2, :city, :state, :zip, :phone1, :phone2,
-      :phone3, :source_code))
-    lead
+  def self.to_csv
+    attributes = %w(account name1 name2 address1 address2 city state zip phone1 phone2 phone3 source_code killed disconnected)
+    CSV.generate(headers: true) do |csv|
+      csv << attributes
+      all.each do |lead|
+        csv << lead.attributes.values_at(*attributes)
+      end
+    end
   end
 
   def self.import(file, campaign_id)
     counter = 0
     CSV.foreach(file.path, headers: true, header_converters: :symbol) do |row|
-      lead = Lead.assign_from_row(row)
+      lead = Lead.create(row.to_hash.slice(:account, :name1, :name2,
+        :address1, :address2, :city, :state, :zip, :phone1, :phone2,
+        :phone3, :source_code))
       lead.campaign_id = campaign_id
       lead.last_dialed = Time.now
       if lead.save

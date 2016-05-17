@@ -4,6 +4,11 @@ class LeadsController < ApplicationController
     @campaign = Campaign.find(params[:campaign_id])
     @leads = Lead.where(campaign_id: @campaign)
     authorize @leads
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data @leads.to_csv, filename: "leads-#{@campaign.name}-#{Date.today}.csv"}
+    end
   end
 
   def show
