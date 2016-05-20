@@ -4,6 +4,7 @@ class Lead < ActiveRecord::Base
 
   belongs_to :campaign
   has_one :recall, dependent: :destroy
+  has_one :sale, dependent: :destroy
 
   default_scope { order("leads.last_dialed ASC") }
 

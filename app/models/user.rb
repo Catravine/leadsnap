@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   before_save { self.role ||= :standard }
 
   has_many :recalls, dependent: :destroy
+  has_many :sales, dependent: :destroy
 
   enum role: [:standard, :manager, :admin]
 
