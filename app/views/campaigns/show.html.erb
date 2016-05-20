@@ -14,21 +14,30 @@
     <h3>Latest Notes:</h3>
     <p><%= @campaign.notes %></p>
   </div>
-  <div class="col-md-4">
+  <div class="col-md-4 admin-options">
     <% if policy(Lead).index? %>
-      <h3><%= link_to "Index of Leads", campaign_leads_path(@campaign) %><h3>
+      <h2><%= link_to "All Leads", campaign_leads_path(@campaign) %><h2>
     <% end %>
     <% if policy(Campaign).edit? %>
       <h3>Add Leads</h3>
       <%= form_tag import_leads_path, multipart: true do %>
         <%= hidden_field_tag :campaign_id, @campaign.id %>
-        <%= file_field_tag :file %>
-        <%= submit_tag "Upload" %>
+        <div class="form-group">
+          <%= label_tag :file, 'CSV file to upload:' %>
+          <%= file_field_tag :file %>
+        </div>
+        <div class="form-group">
+          <%= submit_tag "Upload Leads", class: 'btn btn-success' %>
+        </div>
       <% end %>
 
       <h3>Edit this Campaign</h3>
       <%= link_to "Update", edit_campaign_path(@campaign), class: 'btn btn-success' %>
       <%= link_to "Delete", @campaign, method: :delete, class: 'btn btn-danger', data: {confirm: 'Are you sure you want to delete this campaign and all leads?'} %>
+
+      <h3>Export Leads</h3>
+      <p>Export all leads in the <%= @campaign.name %> campaign in .csv format.</p>
+      <%= link_to "Download CSV", csv_download_path(@campaign), class: 'btn btn-warning' %>
     <% end %>
   </div>
 </div>

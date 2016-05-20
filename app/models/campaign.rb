@@ -10,9 +10,9 @@ class Campaign < ActiveRecord::Base
       user_callbacks.first
 
     elsif current_lead.day_lead?
-      unreachead_leads.where(day_lead: true).find { |l| l.recall.nil? }
+      unreachead_leads.where(day_lead: true).find { |l| l.recall.nil? && l.sale.nil? && l.no.nil? }
     else
-      unreachead_leads.where(source_code: current_lead.source_code).find { |l| l.recall.nil? }
+      unreachead_leads.where(source_code: current_lead.source_code).find { |l| l.recall.nil? && l.sale.nil? && l.no.nil? }
     end
   end
 
