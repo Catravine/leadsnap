@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
 
   has_many :recalls, dependent: :destroy
   has_many :sales, dependent: :destroy
+  has_many :nos, dependent: :destroy
 
   enum role: [:standard, :manager, :admin]
 

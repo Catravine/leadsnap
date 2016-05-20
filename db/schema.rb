@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160519191723) do
+ActiveRecord::Schema.define(version: 20160520180516) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,6 +52,17 @@ ActiveRecord::Schema.define(version: 20160519191723) do
 
   add_index "leads", ["account"], name: "index_leads_on_account", using: :btree
   add_index "leads", ["campaign_id"], name: "index_leads_on_campaign_id", using: :btree
+
+  create_table "nos", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "lead_id"
+    t.datetime "date",       default: '2016-05-20 18:08:26'
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
+  end
+
+  add_index "nos", ["lead_id"], name: "index_nos_on_lead_id", using: :btree
+  add_index "nos", ["user_id"], name: "index_nos_on_user_id", using: :btree
 
   create_table "recalls", force: :cascade do |t|
     t.integer  "user_id"
@@ -101,6 +112,8 @@ ActiveRecord::Schema.define(version: 20160519191723) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "nos", "leads"
+  add_foreign_key "nos", "users"
   add_foreign_key "recalls", "leads"
   add_foreign_key "recalls", "users"
   add_foreign_key "sales", "leads"

@@ -10,3 +10,18 @@
     <%= f.submit "Day Lead", class: 'btn btn-warning' %>
   <% end %>
 <% end %>
+<% unless false %>
+  <%= form_for No.new do |f| %>
+    <%= f.hidden_field :current_lead_id, :value => lead.id  %>
+    <%= f.submit "No", class: 'btn btn-primary' %>
+  <% end %>
+<% end %>
+<% unless false %>
+  <div class="saleform">
+    <%= form_for Sale.new do |f| %>
+      <%= f.hidden_field :current_lead_id, :value => lead.id  %>
+      <%= f.submit "Sale:", class: 'btn btn-success' %>
+      <%= f.text_field :amount, placeholder: '$' %>
+    <% end %>
+  </div>
+<% end %>
