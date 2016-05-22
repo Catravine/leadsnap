@@ -7,7 +7,14 @@ class Lead < ActiveRecord::Base
   has_one :sale, dependent: :destroy
   has_one :no, dependent: :destroy
 
+  # Default order in use is to serve them in order of last dialed
   default_scope { order("leads.last_dialed ASC") }
+
+  # Scopes to find different sets of leads
+  scope :by_source_code, -> (code) { where(source_code: code) }
+  scope :unreached, -> { where.not(:id => Recall.select(:lead_id)).where.not(:id => Sale.select(:lead_id)).where.not(:id => No.select(:lead_id))} 
+  scope :valid, -> { where(killed: false, disconnected: false) }
+  scope :day_leads, -> { where(day_lead: true) }
 
   delegate :name, to: :campaign, prefix: true
   delegate :notes, to: :campaign, prefix: true
