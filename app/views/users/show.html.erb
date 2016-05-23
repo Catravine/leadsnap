@@ -12,12 +12,13 @@
 
     <hr/>
 
-    <h3>Your Sales:</h3>
+    <h3>Your Sales this week:</h3>
     <ul>
-      <% Sale.where(user: @user).each do |sale| %>
-        <li><%= "#{sale.date.strftime("%-m/%-d")}: #{sale.lead.name1}, $#{sale.amount}" %></li>
+      <% Sale.where(date: Time.now.beginning_of_week..Time.now, user: @user).each do |sale| %>
+        <li><%= "#{sale.date.strftime("%-m/%-d")}: #{sale.lead.name1}, $#{sale.amount}" %> - <%= sale.lead.source_code %></li>
       <% end %>
     </ul>
+    <h4>Total: $<%= Sale.where(date: Time.now.beginning_of_week..Time.now, user: @user).sum("amount") %></h4>
   </div>
   <div class="col-md-4 user-callbacks">
     <h3>Callbacks: <%= "none" if Recall.where(user: @user).count == 0 %></h3>

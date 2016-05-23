@@ -1,22 +1,18 @@
-<% unless lead.killed? %>
+<% unless Sale.find_by(lead: lead) || No.find_by(lead: lead) || lead.killed? %>
   <%= form_for [campaign, lead], method: :patch do |f| %>
     <%= f.hidden_field :killed, :value => true %>
     <%= f.submit "Kill", class: 'btn btn-danger' %>
   <% end %>
-<% end %>
-<% unless lead.day_lead? %>
-  <%= form_for [campaign, lead], method: :patch do |f| %>
-    <%= f.hidden_field :day_lead, :value => true %>
-    <%= f.submit "Day Lead", class: 'btn btn-warning' %>
+  <% unless lead.day_lead? %>
+    <%= form_for [campaign, lead], method: :patch do |f| %>
+      <%= f.hidden_field :day_lead, :value => true %>
+      <%= f.submit "Day Lead", class: 'btn btn-warning' %>
+    <% end %>
   <% end %>
-<% end %>
-<% unless false %>
   <%= form_for No.new do |f| %>
     <%= f.hidden_field :current_lead_id, :value => lead.id  %>
     <%= f.submit "No", class: 'btn btn-primary' %>
   <% end %>
-<% end %>
-<% unless false %>
   <div class="saleform">
     <%= form_for Sale.new do |f| %>
       <%= f.hidden_field :current_lead_id, :value => lead.id  %>

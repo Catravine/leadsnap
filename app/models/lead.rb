@@ -52,8 +52,10 @@ class Lead < ActiveRecord::Base
   end
 
   def dial_lead
-    self.dial_count += 1 unless Recall.find_by(lead: self)
-    update(last_dialed: Time.now)
+    unless Sale.find_by(lead: self) || No.find_by(lead: self)
+      self.dial_count += 1 unless Recall.find_by(lead: self)
+      update(last_dialed: Time.now)
+    end
   end
 
   def disconnect_check

@@ -4,6 +4,14 @@ module LeadsHelper
     status = "<h3"
     if lead.killed?
       status << " class=\"killed\">Killed"
+    elsif Sale.find_by(lead: lead)
+      sold_by = Sale.find_by(lead: lead).user.nickname
+      sold_date = Sale.find_by(lead: lead).date
+      status << " class=\"sold\">SOLD by #{sold_by} #{sold_date.strftime("%-m/%-d")}"
+    elsif No.find_by(lead: lead)
+      no_by = No.find_by(lead: lead).user.nickname
+      no_date = No.find_by(lead: lead).date
+      status << " class=\"no\">No on #{no_date.strftime("%-m/%-d")}"
     elsif lead.disconnected?
       status << " class=\"unreached\">No Valid Phone Numbers"
     elsif lead.day_lead?
