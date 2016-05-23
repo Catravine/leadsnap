@@ -8,6 +8,7 @@ class NosController < ApplicationController
    @no = No.new(no_params)
    @current_lead = Lead.find(params[:no][:current_lead_id])
    @next_lead = @current_lead.campaign.next_lead(@current_lead)
+   @current_lead.round =+ 1
    @no.user = current_user
    @no.lead = @current_lead
    @no.date = Time.now

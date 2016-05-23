@@ -1,0 +1,4 @@
+<%= form_for @campaign, method: :patch do |f| %>
+  <%= f.hidden_field :round, :value => @campaign.round + 1  %>
+  <%= f.submit "Start #{(@campaign.round + 2).ordinalize} round on #{Time.now.strftime("%-m/%-d")}", class: 'btn btn-primary' %>
+<% end %>
