@@ -1,8 +1,11 @@
 class Campaign < ActiveRecord::Base
   has_many :leads, dependent: :destroy
 
+  def sources
+    Lead.where(campaign_id: self).pluck(:source_code).uniq
+  end
+
   def next_lead(current_lead)
-    unreachead_leads = leads.where(killed: false, disconnected: false)
     if current_lead.recall
       recall_user = current_lead.recall.user
       user_callbacks = Recall.where(user: recall_user).map { |cb| cb.lead }
@@ -10,9 +13,9 @@ class Campaign < ActiveRecord::Base
       user_callbacks.first
 
     elsif current_lead.day_lead?
-      unreachead_leads.where(day_lead: true).find { |l| l.recall.nil? && l.sale.nil? && l.no.nil? }
+      self.leads.unreached.valid.day_leads.first
     else
-      unreachead_leads.where(source_code: current_lead.source_code).find { |l| l.recall.nil? && l.sale.nil? && l.no.nil? }
+      self.leads.unreached.valid.by_source(current_lead.source_code).first
     end
   end
 

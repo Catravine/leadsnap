@@ -3,20 +3,20 @@
     <tr><th>Source</th><th># leads</th><th>x dialed</th></tr>
   </thead>
   <tbody>
-    <% sources(@campaign).each do |code| %>
-      <% if all_leads(@campaign, code).find { |l| l.recall.nil? } %>
+    <% @campaign.sources.each do |code| %>
+      <% if @campaign.leads.unreached.valid.by_source(code).count > 0 %>
         <tr>
-          <td><%= link_to code, campaign_lead_path(@campaign, all_leads(@campaign, code).find { |l| l.recall.nil? && l.sale.nil? && l.no.nil? }) %>:</td>
-          <td><%= amt_leads(@campaign, code) %></td>
-          <td><%= all_leads(@campaign, code).average(:dial_count).floor %></td>
+          <td><%= link_to code, campaign_lead_path(@campaign, @campaign.leads.unreached.valid.by_source(code).first) %>:</td>
+          <td><%= @campaign.leads.unreached.valid.by_source(code).count %></td>
+          <td><%= @campaign.leads.unreached.valid.by_source(code).average(:dial_count).floor %></td>
         </tr>
       <% end %>
     <% end %>
-    <% if amt_day_leads(@campaign) > 0 %>
+    <% if @campaign.leads.unreached.valid.day_leads.count > 0 %>
       <tr>
-        <td><%= link_to "Day Leads", campaign_lead_path(@campaign, all_day_leads(@campaign).find { |l| l.recall.nil? && l.sale.nil? && l.no.nil? }) %>:</td>
-        <td><%= amt_day_leads(@campaign) %></td>
-        <td><%= all_day_leads(@campaign).average(:dial_count).floor %></td>
+        <td><%= link_to "Day Leads", campaign_lead_path(@campaign, @campaign.leads.unreached.valid.day_leads.first) %>:</td>
+        <td><%= @campaign.leads.unreached.valid.day_leads.count %></td>
+        <td><%= @campaign.leads.unreached.valid.day_leads.average(:dial_count).floor %></td>
       </tr>
     <% end %>
   </tbody>
