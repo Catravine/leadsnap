@@ -83,5 +83,6 @@
     <% end %>
       <p>Dialed <%= @lead.dial_count %> times;
         Last: <%= time_ago_in_words(@last_dial) %> ago.</p>
+      <p>Round: <%= @lead.round + 1 %></p>
   </div>
 </div>

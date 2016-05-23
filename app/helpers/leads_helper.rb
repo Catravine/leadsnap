@@ -16,6 +16,8 @@ module LeadsHelper
       status << " class=\"unreached\">No Valid Phone Numbers"
     elsif lead.day_lead?
       status << " class=\"day_lead\">Day Lead"
+    elsif lead.round > 0
+      status << " class=\"unreached\">Previous 'No'"
     elsif recall = Recall.where(lead: lead).first
       status << " class=\"unreached\">#{recall.user.nickname}'s Callback"
     else
