@@ -19,4 +19,8 @@ class Campaign < ActiveRecord::Base
     end
   end
 
+  def second_round_nos
+    No.destroy_all
+  end
+
 end

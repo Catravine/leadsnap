@@ -34,11 +34,15 @@ class CampaignsController < ApplicationController
     @campaign = Campaign.find(params[:id])
     authorize @campaign
     @campaign.assign_attributes(campaign_params)
+    if campaign_params.include?(:round)
+      @campaign.round_start_date = Time.now
+      @campaign.second_round_nos
+      flash[:notice] = "#{(@campaign.round + 1).ordinalize} round started."
+    end
     if @campaign.save
-      flash[:notice] = "Campaign updated."
       redirect_to @campaign
     else
-      flash[:alert] = "There was an error updated Campaign.  Please try again."
+      flash[:alert] = "There was an error updating this campaign.  Please try again."
       render :edit
     end
   end
@@ -58,7 +62,7 @@ class CampaignsController < ApplicationController
   private
 
   def campaign_params
-    params.require(:campaign).permit(:name, :year, :code, :callback_phone, :notes, :available)
+    params.require(:campaign).permit(:name, :year, :code, :callback_phone, :notes, :available, :round)
   end
 
 end

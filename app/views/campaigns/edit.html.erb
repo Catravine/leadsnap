@@ -1,3 +1,9 @@
 <h1>Edit A Campaign</h1>
 
 <%= render partial: 'form', locals: { campaign: @campaign } %>
+
+<hr/>
+
+<h2>Start <%= (@campaign.round + 2).ordinalize %> Round</h2>
+
+<%= render partial: 'second_round', locals: { campaign: @campaign } %>

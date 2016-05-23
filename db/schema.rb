@@ -11,20 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160520180516) do
+ActiveRecord::Schema.define(version: 20160523182034) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "campaigns", force: :cascade do |t|
     t.string   "name"
-    t.string   "year",           default: "2016"
+    t.string   "year",             default: "2016"
     t.string   "code"
     t.string   "callback_phone"
     t.text     "notes"
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
-    t.boolean  "available",      default: true
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.boolean  "available",        default: true
+    t.integer  "round",            default: 0
+    t.datetime "round_start_date"
   end
 
   create_table "leads", force: :cascade do |t|
@@ -48,6 +50,7 @@ ActiveRecord::Schema.define(version: 20160520180516) do
     t.boolean  "killed",       default: false
     t.boolean  "day_lead",     default: false
     t.boolean  "disconnected", default: false
+    t.integer  "round",        default: 0
   end
 
   add_index "leads", ["account"], name: "index_leads_on_account", using: :btree

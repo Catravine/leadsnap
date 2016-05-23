@@ -3,11 +3,11 @@
   <div class="row">
     <div class="col-md-4">
       <div class="form-group">
-        <%= f.label :name %><br/>
+        <%= f.label :name %>
         <%= f.text_field :name, class: 'form-control', placeholder: 'Venue/Project name' %>
       </div>
       <div class="form-group">
-        <%= f.label :year %><br/>
+        <%= f.label :year %>
         <%= f.text_field :year, class: 'form-control' %>
       </div>
       <div class="form-group">
@@ -17,23 +17,22 @@
     </div>
     <div class="col-md-4">
       <div class="form-group">
-        <%= f.label :code %><br/>
+        <%= f.label :code %>
         <%= f.text_field :code, class: 'form-control', placeholder: 'Dialing prefix' %>
       </div>
       <div class="form-group">
-        <%= f.label :callback_phone %><br/>
+        <%= f.label :callback_phone %>
         <%= f.text_field :callback_phone, class: 'form-control', placeholder: 'Callback phone for this venue' %>
       </div>
     </div>
     <div class="col-md-4">
       <div class="form-group">
-        <%= f.label :notes %><br/>
+        <%= f.label :notes %>
         <%= f.text_area :notes, rows: 6, class: 'form-control', placeholder: 'any timely information pertaining to this project' %>
+      </div>
+      <div class="form-group">
+        <%= f.submit "Save Campaign Information", class: 'btn btn-success' %>
       </div>
     </div>
   </div>
-
-  <hr/>
-
-  <%= f.submit "Save", class: 'btn btn-success' %>
 <% end %>
