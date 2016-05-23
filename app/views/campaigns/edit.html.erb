@@ -5,5 +5,6 @@
 <hr/>
 
 <h2>Start <%= (@campaign.round + 2).ordinalize %> Round</h2>
+<h4><%= (@campaign.round + 1).ordinalize %> round started <%= @campaign.round_start_date %></h4>
 
 <%= render partial: 'second_round', locals: { campaign: @campaign } %>

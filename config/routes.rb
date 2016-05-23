@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  get 'search_results/index'
+  #get 'search_results/index'
 
   # Campaigns (of leads)
   resources :campaigns do

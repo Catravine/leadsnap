@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160523182034) do
+ActiveRecord::Schema.define(version: 20160523201853) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20160523182034) do
     t.boolean  "available",        default: true
     t.integer  "round",            default: 0
     t.datetime "round_start_date"
+    t.integer  "days_old_nos",     default: 90
   end
 
   create_table "leads", force: :cascade do |t|

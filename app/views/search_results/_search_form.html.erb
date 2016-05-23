@@ -2,14 +2,14 @@
 
 <div class="row search-form">
   <div class="col-md-6">
-    <%= form_tag search_results_index_path, method: :get do %>
+    <%= form_tag search_results_path, method: :get do %>
     <p>By Name:</p>
       <%= text_field_tag :name_query, params[:name_query] %>
       <%= submit_tag "Search", name: nil, class: 'btn btn-success' %>
     <% end %>
   </div>
   <div class="col-md-6">
-    <%= form_tag search_results_index_path, method: :get do %>
+    <%= form_tag search_results_path, method: :get do %>
     <p>By Phone:</p>
       <%= text_field_tag :phone_query, params[:phone_query] %>
       <%= submit_tag "Search", name: nil, class: 'btn btn-success' %>

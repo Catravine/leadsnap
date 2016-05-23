@@ -20,7 +20,14 @@ class Campaign < ActiveRecord::Base
   end
 
   def second_round_nos
-    No.destroy_all
+    count = 0
+    No.all.each do |no|
+      if self.leads.include?(no.lead) && no.date < Time.now - self.days_old_nos.days
+        no.destroy
+        count += 1
+      end
+    end
+    count
   end
 
 end
