@@ -19,6 +19,7 @@ class Campaign < ActiveRecord::Base
     end
   end
 
+  # Run at the start of a new round for a particular campaign
   def second_round_nos
     count = 0
     No.all.each do |no|
