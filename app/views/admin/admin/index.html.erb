@@ -1,1 +1,28 @@
-Admin - supertime.
+<h1>Control Panel <small>- <%= current_user.nickname %></small></h1>
+
+<%= render partial: 'search_results/search_form' %>
+
+<hr/>
+
+<h3>Index of all leads</h3>
+<p class="campaign-list">
+  <% Campaign.all.each do |campaign| %>
+    <span><%= link_to campaign.name, campaign_leads_path(campaign) %></span>
+  <% end %>
+</p>
+
+<% if current_user.admin? %>
+  <h3>Edit Campaigns</h3>
+  <p class="campaign-list">
+    <% Campaign.all.each do |campaign| %>
+      <span><%= link_to campaign.name, edit_campaign_path(campaign) %></span>
+    <% end %>
+  </p>
+  <h3>Import/Export leads to Campaigns</h3>
+  <p class="campaign-list">
+    <% Campaign.all.each do |campaign| %>
+      <span><%= link_to campaign.name, campaign_path(campaign) %></span>
+    <% end %>
+  </p>
+  <%= link_to "Add a New Campaign", new_campaign_path, class: 'btn btn-primary' %>
+<% end %>

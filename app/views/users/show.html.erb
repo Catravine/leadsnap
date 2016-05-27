@@ -7,10 +7,11 @@
     </p>
 
     <hr/>
+    <% unless current_user.standard? %>
+      <%= render partial: 'search_results/search_form' %>
 
-    <%= render partial: 'search_results/search_form' %>
-
-    <hr/>
+      <hr/>
+    <% end %>
 
     <h3>Your Sales this week:</h3>
     <ul>

@@ -1,6 +1,9 @@
 class Campaign < ActiveRecord::Base
   has_many :leads, dependent: :destroy
 
+  # Default order alpha by name
+  default_scope { order("campaigns.name ASC") }
+
   def sources
     Lead.where(campaign_id: self).pluck(:source_code).uniq
   end

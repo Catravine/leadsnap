@@ -9,6 +9,7 @@ class SearchResultsController < ApplicationController
       @adj_phone_query = @phone_query.scan(/\d/).join
       @results = Lead.search_phone(phone_parse(@adj_phone_query))
     end
+    authorize @results
   end
 
   private
