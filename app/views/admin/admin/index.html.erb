@@ -1,8 +1,48 @@
+<!--<div id="float-menu">
+  <ul>
+    <li>things</li>
+    <li>stuff</li>
+    <li>moar schtuff</li>
+  </ul>
+</div>-->
 <h1>Control Panel <small>- <%= current_user.nickname %></small></h1>
 
 <%= render partial: 'search_results/search_form' %>
 
 <hr/>
+
+<% if current_user.admin? %>
+
+  <div class="row">
+    <div class="col-md-8">
+      <h3>Totals for the week:</h3>
+      <% @week_goal = 1 %>
+      <table class="goal-table">
+        <thead>
+          <tr>
+            <th>User</th><th>Week</th><th>Goal?</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% User.all.each do |user| %>
+            <tr>
+              <td><%= user.nickname %></td>
+              <td>$<%= user.week_total %></td>
+              <td><% if (user.week_total >= @week_goal) %><span class="glyphicon glyphicon-ok"></span><% end %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-4">
+      <h3>Goals for the week:</h3>
+      <p>$<%= @week_goal %> in new sales from any campaign.</p>
+    </div>
+  </div>
+
+
+  <hr/>
+<% end %>
 
 <h3>Index of all leads</h3>
 <p class="campaign-list">
