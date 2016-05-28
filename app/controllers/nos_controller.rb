@@ -13,7 +13,7 @@ class NosController < ApplicationController
    @no.lead = @current_lead
    @no.date = Time.now
    if @no.save
-     Recall.where(lead: @current_lead).first.destroy
+     Recall.where(lead: @current_lead).first.destroy if Recall.where(lead: @current_lead).count > 0
      flash[:notice] = "#{@current_lead.name1} marked 'no'."
      redirect_to campaign_lead_path(@current_lead.campaign, @next_lead)
    else
