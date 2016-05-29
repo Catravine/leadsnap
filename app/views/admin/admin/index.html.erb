@@ -5,7 +5,7 @@
     <li>moar schtuff</li>
   </ul>
 </div>-->
-<h1>Control Panel <small>- <%= current_user.nickname %></small></h1>
+<h1><%= current_user.role.capitalize %> Control Panel</h1>
 
 <%= render partial: 'search_results/search_form' %>
 
@@ -14,7 +14,7 @@
 <div class="row">
   <div class="col-md-4">
     <h3>Totals for the week:</h3>
-    <% @week_goal = Goal.first.amount %>
+    <% @week_goal = find_weekly_goal %>
     <table class="goal-table">
       <thead>
         <tr>
@@ -34,7 +34,7 @@
   </div>
   <div class="col-md-4">
     <h3>Totals for today:</h3>
-    <% @week_goal = Goal.first.amount %>
+    <% @daily_goal = find_daily_goal %>
     <table class="goal-table">
       <thead>
         <tr>
@@ -46,7 +46,7 @@
           <tr>
             <td><%= user.nickname %></td>
             <td>$<%= user.today_total %></td>
-            <td><% if (user.today_total >= @week_goal) %><span class="glyphicon glyphicon-ok"></span><% end %></td>
+            <td><% if (user.today_total >= @daily_goal) %><span class="glyphicon glyphicon-ok"></span><% end %></td>
           </tr>
         <% end %>
       </tbody>
