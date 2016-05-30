@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(version: 20160528204414) do
     t.datetime "created_at",                                   null: false
     t.datetime "updated_at",                                   null: false
     t.integer  "campaign_id"
-    t.datetime "last_dialed",  default: '2016-04-28 19:30:07', null: false
+    t.datetime "last_dialed",  default: '2016-05-23 19:26:40', null: false
     t.integer  "dial_count",   default: 0
     t.boolean  "killed",       default: false
     t.boolean  "day_lead",     default: false
@@ -71,7 +71,7 @@ ActiveRecord::Schema.define(version: 20160528204414) do
   create_table "nos", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "lead_id"
-    t.datetime "date",       default: '2016-05-20 18:08:26'
+    t.datetime "date",       default: '2016-05-23 19:26:40'
     t.datetime "created_at",                                 null: false
     t.datetime "updated_at",                                 null: false
   end
@@ -128,6 +128,7 @@ ActiveRecord::Schema.define(version: 20160528204414) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "goals", "campaigns"
+  add_foreign_key "leads", "campaigns"
   add_foreign_key "nos", "leads"
   add_foreign_key "nos", "users"
   add_foreign_key "recalls", "leads"

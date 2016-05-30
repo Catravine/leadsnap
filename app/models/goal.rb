@@ -5,9 +5,11 @@ class Goal < ActiveRecord::Base
 
   delegate :name, to: :campaign, prefix: true
 
-  def self.current
-    select { |goal| goal.deadline > Time.now }
-  end
+  scope :current, -> { where('deadline > ?', Time.now) }
+
+  # def self.current
+  #   select { |goal| goal.deadline > Time.now }
+  # end
 
   def self.expired
     select { |goal| goal.deadline < Time.now }

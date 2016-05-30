@@ -36,6 +36,7 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :show, :edit, :update, :destroy]
   match 'users/:id' => 'users#destroy', via: :delete, :as => :admin_destroy_user
   match 'users/:id' => 'users#show', via: :get, :as => :profile
+  
   authenticated :user do
     root 'users#current_user_home', as: :authenticated_user
   end

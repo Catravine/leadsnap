@@ -14,7 +14,7 @@ development:
   encoding: unicode
   database: leadsnap_development
   pool: 5
-  username: caroline
+  username: sircharles
   password:
   timeout: 5000
 

@@ -54,7 +54,7 @@
     <h3>Curent Individual Goals:</h3>
     <ul>
       <% Goal.where(individual: true).current.each do |goal| %>
-        <li><%= goal.individual ? "Each person do" : "Room does" %> $<%= goal.amount %> <%= "in #{Campaign.find(goal.campaign_id).name}" if goal.campaign_id %> <%= goal.weekly ? "this week" : "today" %>.</li>
+        <li><%= goal.individual ? "Each person do" : "Room does" %> $<%= goal.amount %> <%= "in #{goal.campaign_name}" if goal.campaign_id %> <%= goal.weekly ? "this week" : "today" %>.</li>
       <% end %>
     </ul>
     <h4><%= link_to "Goals Index", admin_goals_path %></h4>
@@ -75,7 +75,7 @@
 
 <h3>Index of all leads</h3>
 <p class="campaign-list">
-  <% Campaign.all.each do |campaign| %>
+  <% @campaigns.each do |campaign| %>
     <span><%= link_to campaign.name, campaign_leads_path(campaign) %></span>
   <% end %>
 </p>
