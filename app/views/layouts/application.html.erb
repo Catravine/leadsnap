@@ -19,6 +19,10 @@
           <li><%= link_to "Campaigns", campaigns_path %></li>
           <% if policy(User).index? %>
             <li><%= link_to new_users?, users_path %></li>
+            <li><%= link_to "Admin", admin_root_path %></li>
+          <% end %>
+          <% if current_user.manager? %>
+            <li><%= link_to "Manager", admin_root_path %></li>
           <% end %>
         <% else %>
           <li><%= link_to "Sign In", root_path %></li>

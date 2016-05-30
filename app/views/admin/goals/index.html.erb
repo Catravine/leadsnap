@@ -1,0 +1,13 @@
+<h1>Current Goals</h1>
+<ul>
+  <% @goals.current.each do |goal| %>
+    <li><%= goal.individual ? "Each person do" : "Room does" %> $<%= goal.amount %> <%= "in #{Campaign.find(goal.campaign_id).name}" if goal.campaign_id %> <%= goal.weekly ? "this week" : "today" %>.</li>
+  <% end %>
+</ul>
+
+<h3>Previous Goals</h3>
+<ul>
+  <% @goals.expired.each do |goal| %>
+    <li><%= goal.individual ? "Each person do" : "Room does" %> $<%= goal.amount %> <%= "in #{Campaign.find(goal.campaign_id).name}" if goal.campaign_id %> <%= goal.weekly ? "this week" : "today" %> - Expired <%= goal.deadline.to_date %>.</li>
+  <% end %>
+</ul>

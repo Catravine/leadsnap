@@ -11,6 +11,17 @@ caroline = User.create!(
 )
 caroline.admin!
 
+# Create a guest admin for people to see tour the functionality
+guest_admin = User.create!(
+  email: "admin@example.com",
+  password: "helloworld",
+  password_confirmation: "helloworld",
+  approved: true,
+  phone: "(317) 555-0120",
+  fullname: "Guest Admin"
+)
+guest_admin.admin!
+
 # Create a premium user for my secondary email
 catravine = User.create!(
   email: "catravine@hotmail.com",

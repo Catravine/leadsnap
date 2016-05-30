@@ -5,9 +5,11 @@ class SearchResultsController < ApplicationController
     @phone_query = params[:phone_query]
     if @name_query
       @results = Lead.search_name(@name_query)
+      authorize @results
     elsif @phone_query
       @adj_phone_query = @phone_query.scan(/\d/).join
       @results = Lead.search_phone(phone_parse(@adj_phone_query))
+      authorize @results
     end
   end
 

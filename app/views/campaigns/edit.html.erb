@@ -5,5 +5,13 @@
 <hr/>
 
 <h2>Start <%= (@campaign.round + 2).ordinalize %> Round</h2>
+<h4><%= (@campaign.round + 1).ordinalize %> round started <%= @campaign.round_start_date %></h4>
 
-<%= render partial: 'second_round', locals: { campaign: @campaign } %>
+<div class="row">
+  <div class="col-md-6">
+    <%= render partial: 'second_round', locals: { campaign: @campaign } %>
+  </div>
+  <div class="col-md-6">
+    <h3><%= link_to "Back to #{@campaign.name}", campaign_path(@campaign) %></h3>
+  </div>
+</div>

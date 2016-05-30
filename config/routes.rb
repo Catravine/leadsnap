@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
 
-  get 'search_results/index'
+  # Admin namespace
+  namespace :admin do
+    root 'admin#index'
+    resources :goals
+  end
 
   # Campaigns (of leads)
   resources :campaigns do

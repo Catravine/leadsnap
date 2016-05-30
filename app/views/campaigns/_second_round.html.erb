@@ -1,4 +1,8 @@
 <%= form_for @campaign, method: :patch do |f| %>
   <%= f.hidden_field :round, :value => @campaign.round + 1  %>
+  <div class="form-group">
+    <%= f.label :days_old_nos, "No's older than how many days?" %>
+    <%= f.text_field :days_old_nos, placeholder: '? days' %>
+  </div>
   <%= f.submit "Start #{(@campaign.round + 2).ordinalize} round on #{Time.now.strftime("%-m/%-d")}", class: 'btn btn-primary' %>
 <% end %>

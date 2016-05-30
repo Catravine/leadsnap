@@ -1,6 +1,9 @@
 class Campaign < ActiveRecord::Base
   has_many :leads, dependent: :destroy
 
+  # Default order alpha by name
+  default_scope { order("campaigns.name ASC") }
+
   def sources
     Lead.where(campaign_id: self).pluck(:source_code).uniq
   end
@@ -19,8 +22,16 @@ class Campaign < ActiveRecord::Base
     end
   end
 
+  # Run at the start of a new round for a particular campaign
   def second_round_nos
-    No.destroy_all
+    count = 0
+    No.all.each do |no|
+      if self.leads.include?(no.lead) && no.date < Time.now - self.days_old_nos.days
+        no.destroy
+        count += 1
+      end
+    end
+    count
   end
 
 end

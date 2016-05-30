@@ -16,8 +16,8 @@
   <div class="saleform">
     <%= form_for Sale.new do |f| %>
       <%= f.hidden_field :current_lead_id, :value => lead.id  %>
-      <%= f.submit "Sale:", class: 'btn btn-success' %>
       <%= f.text_field :amount, placeholder: '$' %>
+      <%= f.submit "SOLD!", class: 'btn btn-success' %>
     <% end %>
   </div>
 <% end %>

@@ -16,6 +16,7 @@ class CampaignsController < ApplicationController
   def create
     @campaign = Campaign.new(campaign_params)
     authorize @campaign
+    @campaign.round_start_date = Time.now
     if @campaign.save
       flash[:notice] = "Campaign saved."
       redirect_to @campaign
@@ -36,8 +37,8 @@ class CampaignsController < ApplicationController
     @campaign.assign_attributes(campaign_params)
     if campaign_params.include?(:round)
       @campaign.round_start_date = Time.now
-      @campaign.second_round_nos
-      flash[:notice] = "#{(@campaign.round + 1).ordinalize} round started."
+      count = @campaign.second_round_nos
+      flash[:notice] = "#{(@campaign.round + 1).ordinalize} round started; #{count} leads added back."
     end
     if @campaign.save
       redirect_to @campaign
@@ -62,7 +63,7 @@ class CampaignsController < ApplicationController
   private
 
   def campaign_params
-    params.require(:campaign).permit(:name, :year, :code, :callback_phone, :notes, :available, :round)
+    params.require(:campaign).permit(:name, :year, :code, :callback_phone, :notes, :available, :round, :days_old_nos)
   end
 
 end
