@@ -8,8 +8,12 @@ class Goal < ActiveRecord::Base
 
   delegate :name, to: :campaign, prefix: true
 
+  # def deadline
+  #   weekly ? (Date.today.sunday + 5).beginning_of_day : Date.tomorrow.beginning_of_day
+  # end
+
   def deadline
-    weekly ? (Date.today.sunday + 5).beginning_of_day : Date.tomorrow.beginning_of_day
+    weekly ? self.created_at.sunday.beginning_of_day : self.created_at.end_of_day
   end
 
 end

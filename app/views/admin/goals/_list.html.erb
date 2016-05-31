@@ -1,6 +1,5 @@
 <%= goal.individual ? "Each person do" : "Room does" %>
   $<%= goal.amount %>
   <%= "in #{goal_campaign_name}" if goal.campaign_id %>
-  <%= goal.weekly ? "this week" : "today" %> -
-  <% goal.deadline > Time.now ? "Expires" : "Expired" %>:
+  <%= goal.weekly ? "this week" : "today" %> - Expires:
   <%= goal.deadline.to_date %>.
