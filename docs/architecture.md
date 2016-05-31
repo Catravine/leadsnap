@@ -1,5 +1,10 @@
 #Architectural Decision Record
 
+####2016-05-31
+Starting to polish the app up for staging and to show off.  I'm not going to
+add much more functionality, just refactor and use Faker for data (even though
+one can still upload csv's if they want, it would just add to the leads there)
+
 ###2016-05-10
 Had to change the name of the `callback` model to `recall`; Callback is a class
 within the Active Support package, and was causing `number or arguments error

@@ -1,10 +1,3 @@
-<!--<div id="float-menu">
-  <ul>
-    <li>things</li>
-    <li>stuff</li>
-    <li>moar schtuff</li>
-  </ul>
-</div>-->
 <h1><%= current_user.role.capitalize %> Control Panel</h1>
 
 <%= render partial: 'search_results/search_form' %>
@@ -13,8 +6,8 @@
 <h2>Current Room Goals:</h2>
 <ul>
   <% Goal.where(individual: false).current.each do |goal| %>
-    <li><%= goal.individual ? "Each person do" : "Room does" %> $<%= goal.amount %> <%= "in #{Campaign.find(goal.campaign_id).name}" if goal.campaign_id %> <%= goal.weekly ? "this week" : "today" %> -
-      <%= goal.weekly ? User.room_week_total : User.room_day_total %>/<%= goal.amount %> - <%= ((((goal.weekly ? User.room_week_total : User.room_day_total).to_f)/ goal.amount.to_f) * 100).round%>% </li>
+    <li><%= goal.individual ? "Each person do" : "Room does" %> $<%= goal.amount %> <%= "in #{goal_campaign_name}" if goal.campaign_id %> <%= goal.weekly ? "this week" : "today" %> -
+      <%= goal.weekly ? @room_week_total : @room_day_total %>/<%= goal.amount %> - <%= ((((goal.weekly ? @room_week_total : @room_day_total).to_f)/ goal.amount.to_f) * 100).round%>% </li>
   <% end %>
 </ul>
 
@@ -26,7 +19,7 @@
     <h3>Curent Individual Goals:</h3>
     <ul>
       <% Goal.where(individual: true).current.each do |goal| %>
-        <li><%= goal.individual ? "Each person do" : "Room does" %> $<%= goal.amount %> <%= "in #{Campaign.find(goal.campaign_id).name}" if goal.campaign_id %> <%= goal.weekly ? "this week" : "today" %>.</li>
+        <li><%= goal.individual ? "Each person do" : "Room does" %> $<%= goal.amount %> <%= "in #{goal_campaign_name}" if goal.campaign_id %> <%= goal.weekly ? "this week" : "today" %>.</li>
       <% end %>
     </ul>
     <h4><%= link_to "Goals Index", admin_goals_path %></h4>
@@ -40,7 +33,7 @@
         </tr>
       </thead>
       <tbody>
-        <% User.all.each do |user| %>
+        <% @users.each do |user| %>
           <tr>
             <td><%= user.nickname %></td>
             <td>$<%= user.week_total %></td>
@@ -59,7 +52,7 @@
         </tr>
       </thead>
       <tbody>
-        <% User.all.each do |user| %>
+        <% @users.each do |user| %>
           <tr>
             <td><%= user.nickname %></td>
             <td>$<%= user.today_total %></td>
