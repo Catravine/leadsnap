@@ -81,8 +81,6 @@
       <%= link_to "#{@campaign.name} - Main", campaign_path(@campaign),
         class: 'btn btn-success btn-lg' %>
     <% end %>
-      <p>Dialed <%= @lead.dial_count %> times;
-        Last: <%= time_ago_in_words(@last_dial) %> ago.</p>
-      <p>Round: <%= @lead.round + 1 %></p>
+    <p>(Last Dialed: <%= time_ago_in_words(@last_dial) %> ago)</p>
   </div>
 </div>

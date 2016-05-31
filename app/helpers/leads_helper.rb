@@ -1,30 +1,36 @@
 module LeadsHelper
 
   def lead_status(lead)
-    status = "<h3"
-    if lead.killed?
-      status << " class=\"killed\">Killed"
-    elsif Sale.find_by(lead: lead)
+    content_tag(:h3, lead_status_text(lead), class: "#{lead_status_class(lead)}")
+  end
+
+  def lead_status_text(lead)
+    if recall = Recall.find_by(lead:lead)
+      return "#{recall.user.nickname}'s Callback"
+    end
+    if Sale.find_by(lead: lead)
       sold_by = Sale.find_by(lead: lead).user.nickname
       sold_date = Sale.find_by(lead: lead).date
-      status << " class=\"sold\">SOLD by #{sold_by} #{sold_date.strftime("%-m/%-d")}"
-    elsif No.find_by(lead: lead)
+      return  "#{sold_by} #{sold_date.strftime("%-m/%-d")}"
+    end
+    if No.find_by(lead: lead)
       no_by = No.find_by(lead: lead).user.nickname
       no_date = No.find_by(lead: lead).date
-      status << " class=\"no\">No on #{no_date.strftime("%-m/%-d")}"
-    elsif lead.disconnected?
-      status << " class=\"unreached\">No Valid Phone Numbers"
-    elsif lead.day_lead?
-      status << " class=\"day_lead\">Day Lead"
-    elsif lead.round > 0
-      status << " class=\"unreached\">Previous 'No'"
-    elsif recall = Recall.where(lead: lead).first
-      status << " class=\"unreached\">#{recall.user.nickname}'s Callback"
-    else
-      status << " class=\"unreached\">Unreached"
+      return "No on #{no_date.strftime("%-m/%-d")}"
     end
-    status << "</h3>"
-    return status.html_safe
+    return "Previous Round 'no'" if lead.round > 0
+    return "Killed" if lead.killed?
+    return "No Valid Phone Numbers" if lead.disconnected?
+    return "Day Lead" if lead.day_lead?
+    "Unreached"
+  end
+
+  def lead_status_class(lead)
+    return "killed" if lead.killed?
+    return "day_lead" if lead.day_lead?
+    return "no" if No.find_by(lead: lead)
+    return "sold" if Sale.find_by(lead: lead)
+    "unreached"
   end
 
   def next_lead_button(lead)
