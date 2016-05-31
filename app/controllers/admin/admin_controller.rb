@@ -3,6 +3,7 @@ class Admin::AdminController < ApplicationController
   before_action :authenticate_admin
 
   def index
+    @campaigns = Campaign.all
   end
 
   private
