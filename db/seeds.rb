@@ -1,5 +1,3 @@
-require 'csv'
-
 # Create an admin user for my primary email
 caroline = User.create!(
   email: "caroline@carolinecourtney.com",
@@ -45,44 +43,50 @@ User.create!(
 
 # Create some campaigns
 Campaign.create!(
-  name: "Indianapolis Symphony Orchestra",
+  name: "Naptown Symphony",
   year: "2016",
   code: "42",
-  callback_phone: "(317) 667-0473",
-  notes: "Pay-it-forward offer includes any remaining 15/16 series concert (except Carmina Burana).",
+  callback_phone: "(317) 555-1234",
+  notes: "Buy a Pops subscription, get a free Magic of Christmas ticket, until July 31",
   available: true
 )
 
 Campaign.create!(
-  name: "Symphony on the Prairie - Sample",
-  year: "2015",
+  name: "Naptown Summertime Sounds in the Hills",
+  year: "2016",
   code: "42",
-  callback_phone: "(317) 667-0473",
-  notes: "April 17: our value pak price is now $190.",
+  callback_phone: "(317) 555-1234",
+  notes: "May 17: our value pak price is now $190.",
   available: true
 )
 
-# Seed some leads to the SotP Sample campaign from csv file
-# csv_text = File.read(Rails.root.join('lib', 'seeds', 'sotp_sample_seed.csv'))
-# csv = CSV.parse(csv_text, :headers => true)
-# csv.each do |row|
-#   l = Lead.new
-#   l.account = row['account']
-#   l.name1 = row['name1']
-#   l.name2 = row['name2']
-#   l.address1 = row['address1']
-#   l.address2 = row['address2']
-#   l.city = row['city']
-#   l.state = row['state']
-#   l.zip = row['zip']
-#   l.phone1 = row['phone1']
-#   l.phone2 = row['phone2']
-#   l.phone3 = row['phone3']
-#   l.source_code = row['source']
-#   l.campaign_id = 2
-#   l.save
-#   puts "#{l.name1} saved."
-# end
+Campaign.create!(
+  name: "Naptown Ballet",
+  year: "2016",
+  code: "52",
+  callback_phone: "(317) 555-9999",
+  notes: "May 21: 15-16 season is over, so just sell discounted 16-17 packs",
+  available: true
+)
+
+# Seed some leads Leads with Faker data for these various campaigns
+3000.times do
+  Lead.create!(
+    account: Faker::Number.number(7),
+    name1: Faker::Name.name,
+    name2: Random.rand(10) == 0 ? Faker::Name.name : nil,
+    address1: Faker::Address.street_address,
+    address2: Random.rand(5) == 0 ? Faker::Address.secondary_address : nil,
+    city: Faker::Address.street_name,
+    state: Faker::Address.state_abbr,
+    zip: Faker::Address.zip,
+    phone1: Faker::PhoneNumber.phone_number,
+    phone2: Random.rand(3) == 0 ? Faker::PhoneNumber.phone_number : nil,
+    phone3: Random.rand(6) == 0 ? Faker::PhoneNumber.phone_number : nil,
+    source_code: ["dance", "pops", "masterworks", "jazz", "theatre", "world"].sample,
+    campaign_id: Campaign.all.sample.id
+  )
+end
 
 puts "SEED FINISHED"
 puts "#{User.all.count} users created."
