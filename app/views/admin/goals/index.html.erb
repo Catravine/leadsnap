@@ -1,13 +1,20 @@
-<h1>Current Goals</h1>
-<ul>
-  <% @goals.current.each do |goal| %>
-    <li><%= render partial: 'list', locals: { goal: goal } %></li>
-  <% end %>
-</ul>
+<div class="row">
+  <div class="col-md-7">
+    <h1>Current Goals</h1>
+    <ul>
+      <% @goals.current.each do |goal| %>
+        <li><%= render partial: 'list', locals: { goal: goal } %></li>
+      <% end %>
+    </ul>
 
-<h3>Previous Goals</h3>
-<ul>
-  <% @goals.expired.each do |goal| %>
-    <li><%= render partial: 'list', locals: { goal: goal } %></li>
-  <% end %>
-</ul>
+    <h3>Previous Goals</h3>
+    <ul>
+      <% @goals.expired.each do |goal| %>
+        <li><%= render partial: 'list', locals: { goal: goal } %></li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="col-md-5 new-goal">
+    <%= render template: 'admin/goals/new' %>
+  </div>
+</div>

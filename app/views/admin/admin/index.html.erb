@@ -4,12 +4,20 @@
 
 <hr/>
 <h2>Current Room Goals:</h2>
-<ul>
-  <% Goal.where(individual: false).current.each do |goal| %>
-    <li><%= goal.individual ? "Each person do" : "Room does" %> $<%= goal.amount %> <%= "in #{goal_campaign_name}" if goal.campaign_id %> <%= goal.weekly ? "this week" : "today" %> -
-      <%= goal.weekly ? @room_week_total : @room_day_total %>/<%= goal.amount %> - <%= ((((goal.weekly ? @room_week_total : @room_day_total).to_f)/ goal.amount.to_f) * 100).round%>% </li>
-  <% end %>
-</ul>
+<div class="row">
+  <div class="col-md-7">
+    <ul>
+      <% Goal.where(individual: false).current.each do |goal| %>
+        <li><%= goal.individual ? "Each person do" : "Room does" %> $<%= goal.amount %> <%= "in #{goal_campaign_name}" if goal.campaign_id %> <%= goal.weekly ? "this week" : "today" %> -
+          <%= goal.weekly ? @room_week_total : @room_day_total %>/<%= goal.amount %> - <%= ((((goal.weekly ? @room_week_total : @room_day_total).to_f)/ goal.amount.to_f) * 100).round%>% </li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="col-md-5">
+    <h4><%= link_to "Create/View Goals", admin_goals_path %></h4>
+  </div>
+</div>
+
 
 
 <hr/>
@@ -22,7 +30,7 @@
         <li><%= goal.individual ? "Each person do" : "Room does" %> $<%= goal.amount %> <%= "in #{goal_campaign_name}" if goal.campaign_id %> <%= goal.weekly ? "this week" : "today" %>.</li>
       <% end %>
     </ul>
-    <h4><%= link_to "Goals Index", admin_goals_path %></h4>
+    <h4><%= link_to "Create/View Goals", admin_goals_path %></h4>
   </div>
   <div class="col-md-4">
     <h3>Totals for the week:</h3>

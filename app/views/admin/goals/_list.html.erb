@@ -1,5 +1,9 @@
 <%= goal.individual ? "Each person do" : "Room does" %>
   $<%= goal.amount %>
   <%= "in #{goal_campaign_name}" if goal.campaign_id %>
-  <%= goal.weekly ? "this week" : "today" %> - Expires:
-  <%= goal.deadline.to_date %>.
+  <%= goal.weekly ? "this week" : "today" %> -
+  <%= goal.deadline > Time.now ? "Deadline" : "Expired" %>:
+  <%= goal.deadline.strftime("%-m/%-d") %>
+  <span class="delete-link">
+    <%= link_to '(delete)', admin_goal_path(goal), method: :delete %>
+  </span>
